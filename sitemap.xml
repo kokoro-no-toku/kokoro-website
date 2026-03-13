@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- ホームページ / Homepage -->
+  <url>
+    <loc>https://example.com/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://example.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://example.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://example.com/"/>
+  </url>
+
+  <!-- 英語版トップページ / English Homepage -->
+  <url>
+    <loc>https://example.com/en/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://example.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://example.com/en/"/>
+  </url>
+
+  <!-- APIドキュメント / API Documentation -->
+  <url>
+    <loc>https://example.com/api.html</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://example.com/api.html"/>
+  </url>
+
+  <!-- 料金ページ / Pricing -->
+  <url>
+    <loc>https://example.com/pricing/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://example.com/pricing/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://example.com/en/pricing/"/>
+  </url>
+
+  <!-- プライバシーポリシー / Privacy Policy -->
+  <url>
+    <loc>https://example.com/privacy/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- 利用規約 / Terms of Service -->
+  <url>
+    <loc>https://example.com/terms/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- 特定商取引法 / Commercial Transaction Law -->
+  <url>
+    <loc>https://example.com/tokushoho/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- お問い合わせ / Contact -->
+  <url>
+    <loc>https://example.com/contact/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- FAQ -->
+  <url>
+    <loc>https://example.com/faq/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://example.com/faq/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://example.com/en/faq/"/>
+  </url>
+
+</urlset>
