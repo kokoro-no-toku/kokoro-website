@@ -1,626 +1,231 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Kokoro no Talk API Documentation — Integrate our Japanese AI mental support service into your application.">
-  <meta name="robots" content="index, follow">
-  <title>API Documentation | こころのトーク — Kokoro no Talk</title>
-  <link rel="canonical" href="https://example.com/api.html">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Sans+JP:wght@300;400&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
+こころのトーク
+Kokoro no Talk API v1.0
+Getting Started
+Overview
+Authentication
+Rate Limits
+Error Codes
+Endpoints
+POST
+LINE Webhook
+POST
+/chat
+GET
+/history
+GET
+/user
+POST
+/subscription
+DEL
+/subscription
+Reference
+AI Models
+Pricing & Plans
+SDKs & Libraries
+← Back to Site
+Support
+API Documentation
+Authenticate
+Errors
+← こころのトーク
+Kokoro no Talk API
+Welcome to the Kokoro no Talk (こころのトーク) API. This REST API allows you to integrate our Japanese AI mental support service — powered by Google Gemini — into your applications, platforms, and workflows.
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "headline": "Kokoro no Talk API Documentation",
-    "description": "Technical API documentation for integrating Kokoro no Talk AI mental support service",
-    "inLanguage": "en",
-    "author": { "@type": "Organization", "name": "こころのトーク" },
-    "publisher": { "@type": "Organization", "name": "こころのトーク", "url": "https://example.com" },
-    "url": "https://example.com/api.html"
-  }
-  </script>
+日本語・English の両言語に対応しています。All responses are UTF-8 encoded JSON.
 
-  <style>
-    :root {
-      --bg: #0e0c0a;
-      --surface: #161310;
-      --panel: #1e1a16;
-      --border: #2d2820;
-      --gold: #c9a96e;
-      --gold-dim: rgba(201,169,110,0.3);
-      --text: #e8e0d4;
-      --muted: #6b5f52;
-      --green: #6db87a;
-      --blue: #6ba8c9;
-      --pink: #c96b8a;
-      --yellow: #c9b46b;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Noto Sans JP', sans-serif;
-      background: var(--bg); color: var(--text);
-      display: grid; grid-template-columns: 260px 1fr;
-      min-height: 100vh; font-size: 14px;
-    }
-
-    /* SIDEBAR */
-    aside {
-      background: var(--surface);
-      border-right: 1px solid var(--border);
-      position: fixed; top: 0; left: 0; bottom: 0; width: 260px;
-      overflow-y: auto; padding: 0;
-    }
-    .side-logo {
-      padding: 28px 24px 24px;
-      border-bottom: 1px solid var(--border);
-      display: block; text-decoration: none;
-    }
-    .side-logo .ja {
-      font-family: 'Noto Serif JP', serif; font-weight: 300;
-      font-size: 1.05rem; letter-spacing: 0.12em; color: var(--text);
-      display: block; margin-bottom: 4px;
-    }
-    .side-logo .ja em { color: var(--gold); font-style: normal; }
-    .side-logo .en {
-      font-family: 'Cormorant Garamond', serif; font-style: italic;
-      font-size: 0.78rem; color: var(--muted); letter-spacing: 0.08em;
-    }
-    .side-version {
-      display: inline-block; margin-top: 10px;
-      background: var(--gold-dim); color: var(--gold);
-      font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
-      padding: 3px 10px; letter-spacing: 0.1em;
-    }
-    .side-section {
-      padding: 20px 24px 8px;
-      font-family: 'Cormorant Garamond', serif; font-style: italic;
-      font-size: 0.72rem; color: var(--gold); letter-spacing: 0.25em;
-      text-transform: uppercase;
-    }
-    .side-link {
-      display: flex; align-items: center; gap: 10px;
-      padding: 9px 24px; color: var(--muted);
-      text-decoration: none; font-size: 0.8rem; font-weight: 300;
-      letter-spacing: 0.04em; transition: color 0.2s, background 0.2s;
-      border-left: 2px solid transparent;
-    }
-    .side-link:hover { color: var(--text); background: rgba(255,255,255,0.03); }
-    .side-link.active { color: var(--gold); border-left-color: var(--gold); background: rgba(201,169,110,0.05); }
-    .side-method {
-      display: inline-block; font-family: 'JetBrains Mono', monospace;
-      font-size: 0.6rem; padding: 1px 6px; margin-right: 4px;
-      font-weight: 500;
-    }
-    .get { background: rgba(107,184,122,0.15); color: var(--green); }
-    .post { background: rgba(107,168,201,0.15); color: var(--blue); }
-    .del { background: rgba(201,107,138,0.15); color: var(--pink); }
-
-    /* MAIN */
-    main { margin-left: 260px; padding: 0; }
-
-    /* TOP BAR */
-    .topbar {
-      background: var(--surface); border-bottom: 1px solid var(--border);
-      padding: 16px 56px; display: flex; align-items: center;
-      justify-content: space-between; position: sticky; top: 0; z-index: 50;
-    }
-    .topbar-title {
-      font-family: 'Cormorant Garamond', serif; font-style: italic;
-      font-size: 1rem; color: var(--gold); letter-spacing: 0.1em;
-    }
-    .topbar-links { display: flex; gap: 24px; }
-    .topbar-links a {
-      font-size: 0.75rem; font-weight: 300; color: var(--muted);
-      text-decoration: none; transition: color 0.2s;
-    }
-    .topbar-links a:hover { color: var(--text); }
-
-    /* CONTENT */
-    .content { padding: 56px; max-width: 900px; }
-
-    /* SECTIONS */
-    .doc-section { margin-bottom: 72px; scroll-margin-top: 80px; }
-    h1 {
-      font-family: 'Noto Serif JP', serif; font-weight: 300;
-      font-size: 2.4rem; margin-bottom: 16px; letter-spacing: -0.01em;
-    }
-    h2 {
-      font-family: 'Noto Serif JP', serif; font-weight: 300;
-      font-size: 1.5rem; margin-bottom: 20px; padding-bottom: 12px;
-      border-bottom: 1px solid var(--border); letter-spacing: 0.02em;
-    }
-    h3 {
-      font-family: 'Cormorant Garamond', serif; font-style: italic;
-      font-size: 1.1rem; color: var(--gold); margin-bottom: 14px; letter-spacing: 0.05em;
-    }
-    p { font-weight: 300; line-height: 1.9; color: rgba(232,224,212,0.8); margin-bottom: 16px; }
-    a { color: var(--gold); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
-    /* ENDPOINT CARD */
-    .endpoint {
-      border: 1px solid var(--border); margin-bottom: 32px;
-      border-radius: 2px; overflow: hidden;
-    }
-    .endpoint-header {
-      background: var(--panel); padding: 18px 24px;
-      display: flex; align-items: center; gap: 14px;
-      border-bottom: 1px solid var(--border);
-    }
-    .method-badge {
-      font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
-      font-weight: 500; padding: 4px 12px; letter-spacing: 0.1em;
-    }
-    .endpoint-path {
-      font-family: 'JetBrains Mono', monospace; font-size: 0.88rem;
-      font-weight: 300; color: var(--text);
-    }
-    .endpoint-desc {
-      font-size: 0.75rem; color: var(--muted); margin-left: auto;
-      font-weight: 300;
-    }
-    .endpoint-body { padding: 24px; }
-    .endpoint-body p { font-size: 0.82rem; margin-bottom: 18px; }
-
-    /* PARAM TABLE */
-    .param-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-    .param-table th {
-      font-family: 'Cormorant Garamond', serif; font-style: italic;
-      font-size: 0.75rem; color: var(--gold); font-weight: 300;
-      text-align: left; padding: 8px 12px; letter-spacing: 0.1em;
-      border-bottom: 1px solid var(--border);
-    }
-    .param-table td {
-      padding: 10px 12px; border-bottom: 1px solid rgba(45,40,32,0.5);
-      font-size: 0.79rem; font-weight: 300; vertical-align: top;
-      color: rgba(232,224,212,0.75);
-    }
-    .param-table td:first-child {
-      font-family: 'JetBrains Mono', monospace; font-size: 0.76rem;
-      color: var(--blue);
-    }
-    .param-table td:nth-child(2) {
-      font-family: 'JetBrains Mono', monospace; font-size: 0.73rem;
-      color: var(--pink);
-    }
-    .badge-req {
-      display: inline-block; background: rgba(201,107,138,0.15);
-      color: var(--pink); font-size: 0.6rem; padding: 1px 7px;
-      font-family: 'JetBrains Mono', monospace; margin-left: 6px;
-    }
-    .badge-opt {
-      display: inline-block; background: rgba(107,168,201,0.12);
-      color: var(--blue); font-size: 0.6rem; padding: 1px 7px;
-      font-family: 'JetBrains Mono', monospace; margin-left: 6px;
-    }
-
-    /* CODE BLOCK */
-    .code-label {
-      font-family: 'Cormorant Garamond', serif; font-style: italic;
-      font-size: 0.72rem; color: var(--muted); margin-bottom: 8px;
-      display: block; letter-spacing: 0.1em;
-    }
-    pre {
-      background: var(--panel); border: 1px solid var(--border);
-      padding: 20px 24px; overflow-x: auto; margin-bottom: 20px;
-      border-radius: 1px; position: relative;
-    }
-    code {
-      font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
-      font-weight: 300; line-height: 1.8; color: var(--text);
-    }
-    .tok-key { color: var(--blue); }
-    .tok-str { color: var(--green); }
-    .tok-num { color: var(--yellow); }
-    .tok-cmt { color: var(--muted); }
-    .tok-met { color: var(--pink); }
-    .tok-url { color: var(--gold); }
-
-    .copy-btn {
-      position: absolute; top: 12px; right: 12px;
-      background: var(--border); border: none; color: var(--muted);
-      font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
-      padding: 5px 12px; cursor: pointer; transition: color 0.2s, background 0.2s;
-    }
-    .copy-btn:hover { background: var(--gold-dim); color: var(--gold); }
-
-    /* ALERT */
-    .alert {
-      border-left: 2px solid; padding: 14px 20px;
-      margin-bottom: 24px; font-size: 0.82rem; font-weight: 300;
-    }
-    .alert-info { border-color: var(--blue); background: rgba(107,168,201,0.07); color: rgba(107,168,201,0.9); }
-    .alert-warn { border-color: var(--yellow); background: rgba(201,180,107,0.07); color: rgba(201,180,107,0.9); }
-
-    /* PLAN BADGE */
-    .plan-badge {
-      display: inline-block; font-family: 'JetBrains Mono', monospace;
-      font-size: 0.62rem; padding: 2px 10px;
-      background: var(--gold-dim); color: var(--gold);
-      margin-left: 8px; letter-spacing: 0.1em;
-    }
-
-    /* RESPONSE */
-    .response-header {
-      background: var(--panel); border: 1px solid var(--border);
-      border-bottom: none; padding: 10px 20px;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .status-200 { color: var(--green); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
-    .status-400 { color: var(--yellow); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
-    .status-401 { color: var(--pink); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
-    .response-desc { font-size: 0.75rem; color: var(--muted); }
-  </style>
-</head>
-<body>
-
-<!-- SIDEBAR -->
-<aside role="navigation" aria-label="APIドキュメントナビゲーション">
-  <a href="index.html" class="side-logo">
-    <span class="ja">こころの<em>トーク</em></span>
-    <span class="en">Kokoro no Talk</span>
-    <span class="side-version">API v1.0</span>
-  </a>
-
-  <div class="side-section">Getting Started</div>
-  <a href="#overview" class="side-link active">Overview</a>
-  <a href="#auth" class="side-link">Authentication</a>
-  <a href="#ratelimit" class="side-link">Rate Limits</a>
-  <a href="#errors" class="side-link">Error Codes</a>
-
-  <div class="side-section">Endpoints</div>
-  <a href="#ep-webhook" class="side-link"><span class="side-method post">POST</span> LINE Webhook</a>
-  <a href="#ep-chat" class="side-link"><span class="side-method post">POST</span> /chat</a>
-  <a href="#ep-history" class="side-link"><span class="side-method get">GET</span> /history</a>
-  <a href="#ep-user" class="side-link"><span class="side-method get">GET</span> /user</a>
-  <a href="#ep-sub" class="side-link"><span class="side-method post">POST</span> /subscription</a>
-  <a href="#ep-cancel" class="side-link"><span class="side-method del">DEL</span> /subscription</a>
-
-  <div class="side-section">Reference</div>
-  <a href="#models" class="side-link">AI Models</a>
-  <a href="#pricing" class="side-link">Pricing &amp; Plans</a>
-  <a href="#sdks" class="side-link">SDKs &amp; Libraries</a>
-
-  <div style="padding: 24px; margin-top: auto; border-top: 1px solid var(--border); margin-top: 32px;">
-    <a href="index.html" style="font-size:0.75rem; color: var(--muted); text-decoration:none; display:block; margin-bottom:8px;">← Back to Site</a>
-    <a href="mailto:hello@example.com" style="font-size:0.75rem; color: var(--muted); text-decoration:none;">Support</a>
-  </div>
-</aside>
-
-<!-- MAIN -->
-<main>
-  <div class="topbar">
-    <span class="topbar-title">API Documentation</span>
-    <div class="topbar-links">
-      <a href="#auth">Authenticate</a>
-      <a href="#errors">Errors</a>
-      <a href="index.html">← こころのトーク</a>
-    </div>
-  </div>
-
-  <div class="content">
-
-    <!-- OVERVIEW -->
-    <section class="doc-section" id="overview">
-      <h1>Kokoro no Talk API</h1>
-      <p>Welcome to the <strong>Kokoro no Talk (こころのトーク)</strong> API. This REST API allows you to integrate our Japanese AI mental support service — powered by Google Gemini — into your applications, platforms, and workflows.</p>
-      <p>日本語・English の両言語に対応しています。All responses are UTF-8 encoded JSON.</p>
-      <div class="alert alert-info">
-        <strong>Base URL:</strong> &nbsp;<code>https://api.example.com/v1</code><br>
-        All API requests must be made over HTTPS.
-      </div>
-
-      <h3>Quick Start</h3>
-      <span class="code-label">cURL example</span>
-      <pre><button class="copy-btn" onclick="copyCode(this)">copy</button><code><span class="tok-cmt"># Send a chat message to the AI</span>
-<span class="tok-met">curl</span> -X POST <span class="tok-str">"https://api.example.com/v1/chat"</span> \
-  -H <span class="tok-str">"Authorization: Bearer YOUR_API_KEY"</span> \
-  -H <span class="tok-str">"Content-Type: application/json"</span> \
-  -d <span class="tok-str">'{
+Base URL:  https://kokoro-bot-production.up.railway.app/v1
+All API requests must be made over HTTPS.
+Quick Start
+cURL example
+copy# Send a chat message to the AI
+curl -X POST "https://kokoro-bot-production.up.railway.app/v1/chat" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
     "user_id": "user_abc123",
     "message": "最近、仕事のことで悩んでいます。",
     "language": "ja"
-  }'</span></code></pre>
-    </section>
+  }'
+Authentication
+All API requests require a Bearer token in the Authorization header. API keys are generated from your dashboard after subscription.
 
-    <!-- AUTH -->
-    <section class="doc-section" id="auth">
-      <h2>Authentication</h2>
-      <p>All API requests require a Bearer token in the <code>Authorization</code> header. API keys are generated from your dashboard after subscription.</p>
-      <div class="alert alert-warn">
-        Keep your API key secret. Never expose it in client-side code or public repositories.
-      </div>
-      <span class="code-label">Authorization header</span>
-      <pre><code><span class="tok-key">Authorization</span>: Bearer <span class="tok-str">knt_live_xxxxxxxxxxxxxxxxxxxxxxxx</span></code></pre>
+Keep your API key secret. Never expose it in client-side code or public repositories.
+Authorization header
+Authorization: Bearer knt_live_xxxxxxxxxxxxxxxxxxxxxxxx
+API Key Format
+Prefix	Environment	Description
+knt_live_	Production	Live API key for production use
+knt_test_	Sandbox	Test key — no charges, mock responses
+Rate Limits
+Plan	Requests / min	Requests / day
+国内プラン (¥980/mo)	20	1,000
+Global Premium ($299.99/mo)	60	Unlimited
+Rate limit headers are returned on every response: X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset.
 
-      <h3>API Key Format</h3>
-      <table class="param-table">
-        <tr><th>Prefix</th><th>Environment</th><th>Description</th></tr>
-        <tr><td>knt_live_</td><td>Production</td><td>Live API key for production use</td></tr>
-        <tr><td>knt_test_</td><td>Sandbox</td><td>Test key — no charges, mock responses</td></tr>
-      </table>
-    </section>
-
-    <!-- RATE LIMIT -->
-    <section class="doc-section" id="ratelimit">
-      <h2>Rate Limits</h2>
-      <table class="param-table">
-        <tr><th>Plan</th><th>Requests / min</th><th>Requests / day</th></tr>
-        <tr><td>国内プラン (¥980/mo)</td><td>20</td><td>1,000</td></tr>
-        <tr><td>Global Premium ($299.99/mo)</td><td>60</td><td>Unlimited</td></tr>
-      </table>
-      <p>Rate limit headers are returned on every response: <code>X-RateLimit-Limit</code>, <code>X-RateLimit-Remaining</code>, <code>X-RateLimit-Reset</code>.</p>
-    </section>
-
-    <!-- ERRORS -->
-    <section class="doc-section" id="errors">
-      <h2>Error Codes</h2>
-      <table class="param-table">
-        <tr><th>Status</th><th>Code</th><th>Description</th></tr>
-        <tr><td>400</td><td>invalid_request</td><td>Missing or malformed parameters</td></tr>
-        <tr><td>401</td><td>unauthorized</td><td>Invalid or expired API key</td></tr>
-        <tr><td>403</td><td>forbidden</td><td>Subscription inactive or plan limit exceeded</td></tr>
-        <tr><td>404</td><td>not_found</td><td>Resource not found</td></tr>
-        <tr><td>429</td><td>rate_limited</td><td>Rate limit exceeded</td></tr>
-        <tr><td>500</td><td>server_error</td><td>Internal server error</td></tr>
-      </table>
-      <span class="code-label">Error response format</span>
-      <pre><code>{
-  <span class="tok-key">"error"</span>: {
-    <span class="tok-key">"code"</span>: <span class="tok-str">"rate_limited"</span>,
-    <span class="tok-key">"message"</span>: <span class="tok-str">"Rate limit exceeded. Retry after 60 seconds."</span>,
-    <span class="tok-key">"retry_after"</span>: <span class="tok-num">60</span>
+Error Codes
+Status	Code	Description
+400	invalid_request	Missing or malformed parameters
+401	unauthorized	Invalid or expired API key
+403	forbidden	Subscription inactive or plan limit exceeded
+404	not_found	Resource not found
+429	rate_limited	Rate limit exceeded
+500	server_error	Internal server error
+Error response format
+{
+  "error": {
+    "code": "rate_limited",
+    "message": "Rate limit exceeded. Retry after 60 seconds.",
+    "retry_after": 60
   }
-}</code></pre>
-    </section>
+}
+LINE Webhook
+POST
+/webhook/line
+LINE platform → your server
+This endpoint receives events from the LINE Messaging API. Configure this URL in your LINE Developer Console as your webhook URL. The service automatically processes incoming messages and replies via LINE.
 
-    <!-- WEBHOOK -->
-    <section class="doc-section" id="ep-webhook">
-      <h2>LINE Webhook</h2>
-      <div class="endpoint">
-        <div class="endpoint-header">
-          <span class="method-badge post">POST</span>
-          <span class="endpoint-path">/webhook/line</span>
-          <span class="endpoint-desc">LINE platform → your server</span>
-        </div>
-        <div class="endpoint-body">
-          <p>This endpoint receives events from the LINE Messaging API. Configure this URL in your LINE Developer Console as your webhook URL. The service automatically processes incoming messages and replies via LINE.</p>
-          <div class="alert alert-info">
-            LINE will verify your server with a <code>X-Line-Signature</code> header. Signature validation is handled automatically.
-          </div>
-          <h3>Webhook Event Types Handled</h3>
-          <table class="param-table">
-            <tr><th>Event Type</th><th>Description</th></tr>
-            <tr><td>message</td><td>User sends a text message — triggers AI response</td></tr>
-            <tr><td>follow</td><td>User adds the LINE Official Account</td></tr>
-            <tr><td>unfollow</td><td>User blocks or removes the account</td></tr>
-            <tr><td>postback</td><td>User taps a quick reply button</td></tr>
-          </table>
-          <span class="code-label">Example LINE message event payload</span>
-          <pre><code>{
-  <span class="tok-key">"destination"</span>: <span class="tok-str">"Uxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"</span>,
-  <span class="tok-key">"events"</span>: [{
-    <span class="tok-key">"type"</span>: <span class="tok-str">"message"</span>,
-    <span class="tok-key">"replyToken"</span>: <span class="tok-str">"nHuyWiB7yP5Zw52FIkcQobQuGDXCTA"</span>,
-    <span class="tok-key">"source"</span>: {
-      <span class="tok-key">"type"</span>: <span class="tok-str">"user"</span>,
-      <span class="tok-key">"userId"</span>: <span class="tok-str">"U4af4980629..."</span>
+LINE will verify your server with a X-Line-Signature header. Signature validation is handled automatically.
+Webhook Event Types Handled
+Event Type	Description
+message	User sends a text message — triggers AI response
+follow	User adds the LINE Official Account
+unfollow	User blocks or removes the account
+postback	User taps a quick reply button
+Example LINE message event payload
+{
+  "destination": "Uxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "events": [{
+    "type": "message",
+    "replyToken": "nHuyWiB7yP5Zw52FIkcQobQuGDXCTA",
+    "source": {
+      "type": "user",
+      "userId": "U4af4980629..."
     },
-    <span class="tok-key">"message"</span>: {
-      <span class="tok-key">"type"</span>: <span class="tok-str">"text"</span>,
-      <span class="tok-key">"text"</span>: <span class="tok-str">"最近、眠れない日が続いています。"</span>
+    "message": {
+      "type": "text",
+      "text": "最近、眠れない日が続いています。"
     }
   }]
-}</code></pre>
-        </div>
-      </div>
-    </section>
+}
+/chat
+POST
+/v1/chat
+Send a message to the AI
+Send a message to the Kokoro no Talk AI and receive an empathetic, contextually-aware response in Japanese.
 
-    <!-- CHAT -->
-    <section class="doc-section" id="ep-chat">
-      <h2>/chat</h2>
-      <div class="endpoint">
-        <div class="endpoint-header">
-          <span class="method-badge post">POST</span>
-          <span class="endpoint-path">/v1/chat</span>
-          <span class="endpoint-desc">Send a message to the AI</span>
-        </div>
-        <div class="endpoint-body">
-          <p>Send a message to the Kokoro no Talk AI and receive an empathetic, contextually-aware response in Japanese.</p>
-          <h3>Request Parameters</h3>
-          <table class="param-table">
-            <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
-            <tr><td>user_id <span class="badge-req">required</span></td><td>string</td><td>LINE user ID or internal user identifier</td></tr>
-            <tr><td>message <span class="badge-req">required</span></td><td>string</td><td>User's message text (max 2000 chars)</td></tr>
-            <tr><td>language <span class="badge-opt">optional</span></td><td>string</td><td>Language code: <code>ja</code> (default) or <code>en</code></td></tr>
-            <tr><td>session_id <span class="badge-opt">optional</span></td><td>string</td><td>Conversation session ID for context continuity</td></tr>
-            <tr><td>emotion_analysis <span class="badge-opt">optional</span></td><td>boolean</td><td>Return emotion analysis in response (default: true)</td></tr>
-          </table>
-          <span class="code-label">Request body</span>
-          <pre><code>{
-  <span class="tok-key">"user_id"</span>: <span class="tok-str">"U4af4980629abc"</span>,
-  <span class="tok-key">"message"</span>: <span class="tok-str">"最近、仕事のことで悩んでいます。誰にも言えなくて。"</span>,
-  <span class="tok-key">"language"</span>: <span class="tok-str">"ja"</span>,
-  <span class="tok-key">"session_id"</span>: <span class="tok-str">"sess_xyz789"</span>,
-  <span class="tok-key">"emotion_analysis"</span>: <span class="tok-num">true</span>
-}</code></pre>
-          <div class="response-header">
-            <span class="status-200">200</span>
-            <span class="response-desc">Successful response</span>
-          </div>
-          <pre><code>{
-  <span class="tok-key">"message_id"</span>: <span class="tok-str">"msg_abc123"</span>,
-  <span class="tok-key">"session_id"</span>: <span class="tok-str">"sess_xyz789"</span>,
-  <span class="tok-key">"response"</span>: <span class="tok-str">"それは辛かったですね。一人で抱えてきたんですね。\nどんなことで悩んでいるか、もう少し聞かせてもらえますか？"</span>,
-  <span class="tok-key">"emotion"</span>: {
-    <span class="tok-key">"primary"</span>: <span class="tok-str">"anxiety"</span>,
-    <span class="tok-key">"secondary"</span>: <span class="tok-str">"loneliness"</span>,
-    <span class="tok-key">"intensity"</span>: <span class="tok-num">0.72</span>
+Request Parameters
+Parameter	Type	Description
+user_id required	string	LINE user ID or internal user identifier
+message required	string	User's message text (max 2000 chars)
+language optional	string	Language code: ja (default) or en
+session_id optional	string	Conversation session ID for context continuity
+emotion_analysis optional	boolean	Return emotion analysis in response (default: true)
+Request body
+{
+  "user_id": "U4af4980629abc",
+  "message": "最近、仕事のことで悩んでいます。誰にも言えなくて。",
+  "language": "ja",
+  "session_id": "sess_xyz789",
+  "emotion_analysis": true
+}
+200
+Successful response
+{
+  "message_id": "msg_abc123",
+  "session_id": "sess_xyz789",
+  "response": "それは辛かったですね。一人で抱えてきたんですね。\nどんなことで悩んでいるか、もう少し聞かせてもらえますか？",
+  "emotion": {
+    "primary": "anxiety",
+    "secondary": "loneliness",
+    "intensity": 0.72
   },
-  <span class="tok-key">"tokens_used"</span>: <span class="tok-num">148</span>,
-  <span class="tok-key">"created_at"</span>: <span class="tok-str">"2025-09-15T03:22:10Z"</span>
-}</code></pre>
-        </div>
-      </div>
-    </section>
-
-    <!-- HISTORY -->
-    <section class="doc-section" id="ep-history">
-      <h2>/history</h2>
-      <div class="endpoint">
-        <div class="endpoint-header">
-          <span class="method-badge get">GET</span>
-          <span class="endpoint-path">/v1/history/{user_id}</span>
-          <span class="endpoint-desc">Retrieve conversation history</span>
-        </div>
-        <div class="endpoint-body">
-          <h3>Query Parameters</h3>
-          <table class="param-table">
-            <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
-            <tr><td>limit <span class="badge-opt">optional</span></td><td>integer</td><td>Number of messages to return (default: 20, max: 100)</td></tr>
-            <tr><td>before <span class="badge-opt">optional</span></td><td>string</td><td>Cursor for pagination (message_id)</td></tr>
-            <tr><td>session_id <span class="badge-opt">optional</span></td><td>string</td><td>Filter by session</td></tr>
-          </table>
-          <span class="code-label">Response</span>
-          <pre><code>{
-  <span class="tok-key">"messages"</span>: [
+  "tokens_used": 148,
+  "created_at": "2025-09-15T03:22:10Z"
+}
+/history
+GET
+/v1/history/{user_id}
+Retrieve conversation history
+Query Parameters
+Parameter	Type	Description
+limit optional	integer	Number of messages to return (default: 20, max: 100)
+before optional	string	Cursor for pagination (message_id)
+session_id optional	string	Filter by session
+Response
+{
+  "messages": [
     {
-      <span class="tok-key">"id"</span>: <span class="tok-str">"msg_abc123"</span>,
-      <span class="tok-key">"role"</span>: <span class="tok-str">"user"</span>,
-      <span class="tok-key">"content"</span>: <span class="tok-str">"最近、眠れない日が続いています。"</span>,
-      <span class="tok-key">"created_at"</span>: <span class="tok-str">"2025-09-15T03:22:05Z"</span>
+      "id": "msg_abc123",
+      "role": "user",
+      "content": "最近、眠れない日が続いています。",
+      "created_at": "2025-09-15T03:22:05Z"
     },
     {
-      <span class="tok-key">"id"</span>: <span class="tok-str">"msg_abc124"</span>,
-      <span class="tok-key">"role"</span>: <span class="tok-str">"assistant"</span>,
-      <span class="tok-key">"content"</span>: <span class="tok-str">"眠れない夜が続いているんですね。それはとても辛いですね。"</span>,
-      <span class="tok-key">"created_at"</span>: <span class="tok-str">"2025-09-15T03:22:09Z"</span>
+      "id": "msg_abc124",
+      "role": "assistant",
+      "content": "眠れない夜が続いているんですね。それはとても辛いですね。",
+      "created_at": "2025-09-15T03:22:09Z"
     }
   ],
-  <span class="tok-key">"has_more"</span>: <span class="tok-num">true</span>,
-  <span class="tok-key">"next_cursor"</span>: <span class="tok-str">"msg_abc120"</span>
-}</code></pre>
-        </div>
-      </div>
-    </section>
+  "has_more": true,
+  "next_cursor": "msg_abc120"
+}
+/subscription
+POST
+/v1/subscription
+Create a new subscription via PayPal
+Request Parameters
+Parameter	Type	Description
+user_id required	string	User identifier
+plan required	string	domestic_jpy or global_usd
+paypal_order_id required	string	PayPal order ID from client-side checkout
+Request body
+{
+  "user_id": "U4af4980629abc",
+  "plan": "global_usd",
+  "paypal_order_id": "5O190127TN364715T"
+}
+200
+Subscription created
+{
+  "subscription_id": "sub_global_xyz",
+  "plan": "global_usd",
+  "status": "active",
+  "amount": 299.99,
+  "currency": "USD",
+  "next_billing_date": "2025-10-15"
+}
+AI Models
+Model	Plan	Description
+gemini-1.5-pro-ja	Both	Default model. Japanese-optimized, empathetic responses.
+gemini-1.5-flash-ja	Domestic	Fast, lightweight model for quick responses.
+gemini-ultra-ja	Global	Highest capability model. Deep emotional understanding.
+Pricing & Plans
+Plan	Price	Currency	Region
+domestic_jpy	980	JPY / month	Japan
+global_usd	299.99	USD / month	Worldwide
+Billing is processed through PayPal. Cancel anytime — no cancellation fees.
 
-    <!-- SUBSCRIPTION -->
-    <section class="doc-section" id="ep-sub">
-      <h2>/subscription</h2>
-      <div class="endpoint">
-        <div class="endpoint-header">
-          <span class="method-badge post">POST</span>
-          <span class="endpoint-path">/v1/subscription</span>
-          <span class="endpoint-desc">Create a new subscription via PayPal</span>
-        </div>
-        <div class="endpoint-body">
-          <h3>Request Parameters</h3>
-          <table class="param-table">
-            <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
-            <tr><td>user_id <span class="badge-req">required</span></td><td>string</td><td>User identifier</td></tr>
-            <tr><td>plan <span class="badge-req">required</span></td><td>string</td><td><code>domestic_jpy</code> or <code>global_usd</code></td></tr>
-            <tr><td>paypal_order_id <span class="badge-req">required</span></td><td>string</td><td>PayPal order ID from client-side checkout</td></tr>
-          </table>
-          <span class="code-label">Request body</span>
-          <pre><code>{
-  <span class="tok-key">"user_id"</span>: <span class="tok-str">"U4af4980629abc"</span>,
-  <span class="tok-key">"plan"</span>: <span class="tok-str">"global_usd"</span>,
-  <span class="tok-key">"paypal_order_id"</span>: <span class="tok-str">"5O190127TN364715T"</span>
-}</code></pre>
-          <div class="response-header">
-            <span class="status-200">200</span>
-            <span class="response-desc">Subscription created</span>
-          </div>
-          <pre><code>{
-  <span class="tok-key">"subscription_id"</span>: <span class="tok-str">"sub_global_xyz"</span>,
-  <span class="tok-key">"plan"</span>: <span class="tok-str">"global_usd"</span>,
-  <span class="tok-key">"status"</span>: <span class="tok-str">"active"</span>,
-  <span class="tok-key">"amount"</span>: <span class="tok-num">299.99</span>,
-  <span class="tok-key">"currency"</span>: <span class="tok-str">"USD"</span>,
-  <span class="tok-key">"next_billing_date"</span>: <span class="tok-str">"2025-10-15"</span>
-}</code></pre>
-        </div>
-      </div>
-    </section>
+SDKs & Libraries
+Official SDKs are under development. Current supported integration methods:
 
-    <!-- MODELS -->
-    <section class="doc-section" id="models">
-      <h2>AI Models</h2>
-      <table class="param-table">
-        <tr><th>Model</th><th>Plan</th><th>Description</th></tr>
-        <tr><td>gemini-1.5-pro-ja</td><td><span class="plan-badge">Both</span></td><td>Default model. Japanese-optimized, empathetic responses.</td></tr>
-        <tr><td>gemini-1.5-flash-ja</td><td><span class="plan-badge">Domestic</span></td><td>Fast, lightweight model for quick responses.</td></tr>
-        <tr><td>gemini-ultra-ja</td><td><span class="plan-badge">Global</span></td><td>Highest capability model. Deep emotional understanding.</td></tr>
-      </table>
-    </section>
+Python (Flask integration example)
+# Install dependencies
+pip install flask line-bot-sdk google-generativeai paypalrestsdk psycopg2
 
-    <!-- PRICING REFERENCE -->
-    <section class="doc-section" id="pricing">
-      <h2>Pricing &amp; Plans</h2>
-      <table class="param-table">
-        <tr><th>Plan</th><th>Price</th><th>Currency</th><th>Region</th></tr>
-        <tr><td>domestic_jpy</td><td>980</td><td>JPY / month</td><td>Japan</td></tr>
-        <tr><td>global_usd</td><td>299.99</td><td>USD / month</td><td>Worldwide</td></tr>
-      </table>
-      <p>Billing is processed through PayPal. Cancel anytime — no cancellation fees.</p>
-    </section>
-
-    <!-- SDKs -->
-    <section class="doc-section" id="sdks">
-      <h2>SDKs &amp; Libraries</h2>
-      <p>Official SDKs are under development. Current supported integration methods:</p>
-      <span class="code-label">Python (Flask integration example)</span>
-      <pre><code><span class="tok-cmt"># Install dependencies</span>
-<span class="tok-met">pip install</span> flask line-bot-sdk google-generativeai paypalrestsdk psycopg2
-
-<span class="tok-cmt"># Basic webhook handler</span>
-<span class="tok-key">from</span> flask <span class="tok-key">import</span> Flask, request, abort
-<span class="tok-key">from</span> linebot <span class="tok-key">import</span> LineBotApi, WebhookHandler
-<span class="tok-key">import</span> google.generativeai <span class="tok-key">as</span> genai
+# Basic webhook handler
+from flask import Flask, request, abort
+from linebot import LineBotApi, WebhookHandler
+import google.generativeai as genai
 
 app = Flask(__name__)
-line_bot_api = LineBotApi(<span class="tok-str">'YOUR_CHANNEL_ACCESS_TOKEN'</span>)
-handler = WebhookHandler(<span class="tok-str">'YOUR_CHANNEL_SECRET'</span>)
-genai.configure(api_key=<span class="tok-str">'YOUR_GEMINI_API_KEY'</span>)
+line_bot_api = LineBotApi('YOUR_CHANNEL_ACCESS_TOKEN')
+handler = WebhookHandler('YOUR_CHANNEL_SECRET')
+genai.configure(api_key='YOUR_GEMINI_API_KEY')
 
-<span class="tok-key">@app.route</span>(<span class="tok-str">'/webhook/line'</span>, methods=[<span class="tok-str">'POST'</span>])
-<span class="tok-key">def</span> webhook():
-    signature = request.headers[<span class="tok-str">'X-Line-Signature'</span>]
-    body = request.get_data(as_text=<span class="tok-num">True</span>)
+@app.route('/webhook/line', methods=['POST'])
+def webhook():
+    signature = request.headers['X-Line-Signature']
+    body = request.get_data(as_text=True)
     handler.handle(body, signature)
-    <span class="tok-key">return</span> <span class="tok-str">'OK'</span></code></pre>
-    </section>
-
-  </div>
-</main>
-
-<script>
-  function copyCode(btn) {
-    const pre = btn.closest('pre');
-    const text = pre.innerText.replace('copy', '').trim();
-    navigator.clipboard.writeText(text).then(() => {
-      btn.textContent = 'copied!';
-      setTimeout(() => btn.textContent = 'copy', 2000);
-    });
-  }
-
-  // Active sidebar link on scroll
-  const sections = document.querySelectorAll('.doc-section');
-  const links = document.querySelectorAll('.side-link');
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        links.forEach(l => l.classList.remove('active'));
-        const active = document.querySelector(`.side-link[href="#${e.target.id}"]`);
-        if (active) active.classList.add('active');
-      }
-    });
-  }, { threshold: 0.3, rootMargin: '-80px 0px -60% 0px' });
-  sections.forEach(s => obs.observe(s));
-</script>
-</body>
-</html>
+    return 'OK'
