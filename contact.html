@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お問い合わせ｜ホームページ制作</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Playfair+Display:wght@700&display=swap');
+
+  :root {
+    --navy: #1a3a6b;
+    --navy-dark: #0f2448;
+    --navy-light: #2a5298;
+    --gold: #ffd250;
+    --gold-light: #ffe89a;
+    --white: #ffffff;
+    --text-light: #b4ccee;
+    --red-badge: #b43232;
+    --bg: #0d1f3c;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px 60px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* 背景の星屑風装飾 */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 20%, rgba(42, 82, 152, 0.3) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(255, 210, 80, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 560px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ヘッダー */
+  .header {
+    text-align: center;
+    margin-bottom: 36px;
+    animation: fadeDown 0.6s ease both;
+  }
+
+  .header-badge {
+    display: inline-block;
+    background: var(--red-badge);
+    color: #fff9cc;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 20px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    letter-spacing: 0.05em;
+  }
+
+  .header h1 {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    margin-bottom: 10px;
+  }
+
+  .header p {
+    color: var(--text-light);
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  /* 料金サマリー */
+  .price-summary {
+    background: rgba(26, 58, 107, 0.6);
+    border: 1px solid rgba(255, 210, 80, 0.3);
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    animation: fadeDown 0.6s 0.1s ease both;
+  }
+
+  .price-summary h2 {
+    color: var(--gold);
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: 0.1em;
+  }
+
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    color: var(--white);
+    font-size: 15px;
+  }
+  .price-row:last-child { border-bottom: none; }
+  .price-row .price { color: var(--gold); font-weight: 700; font-size: 17px; }
+  .price-note {
+    text-align: center;
+    color: var(--text-light);
+    font-size: 12px;
+    margin-top: 10px;
+  }
+
+  /* フォームカード */
+  .form-card {
+    background: rgba(26, 58, 107, 0.5);
+    border: 1px solid rgba(100, 160, 220, 0.25);
+    border-radius: 20px;
+    padding: 32px 28px;
+    animation: fadeDown 0.6s 0.2s ease both;
+    backdrop-filter: blur(10px);
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    color: var(--text-light);
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+  }
+
+  label .required {
+    color: var(--gold);
+    margin-left: 4px;
+    font-size: 11px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  select,
+  textarea {
+    width: 100%;
+    background: rgba(13, 31, 60, 0.8);
+    border: 1px solid rgba(100, 160, 220, 0.3);
+    border-radius: 10px;
+    padding: 14px 16px;
+    color: var(--white);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 15px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    -webkit-appearance: none;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(255, 210, 80, 0.15);
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: rgba(180, 204, 238, 0.4);
+  }
+
+  select option {
+    background: var(--navy-dark);
+    color: var(--white);
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.7;
+  }
+
+  /* ページ数選択 */
+  .page-options {
+    display: flex;
+    gap: 10px;
+  }
+
+  .page-option {
+    flex: 1;
+    position: relative;
+  }
+
+  .page-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+  }
+
+  .page-option label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(13, 31, 60, 0.8);
+    border: 1px solid rgba(100, 160, 220, 0.3);
+    border-radius: 10px;
+    padding: 12px 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin: 0;
+    text-align: center;
+  }
+
+  .page-option label .pages { color: var(--white); font-size: 15px; font-weight: 700; }
+  .page-option label .page-price { color: var(--gold); font-size: 12px; margin-top: 4px; }
+
+  .page-option input:checked + label {
+    border-color: var(--gold);
+    background: rgba(255, 210, 80, 0.1);
+    box-shadow: 0 0 0 2px rgba(255, 210, 80, 0.3);
+  }
+
+  /* 送信ボタン */
+  .submit-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--gold) 0%, #ffb800 100%);
+    color: var(--navy-dark);
+    border: none;
+    border-radius: 14px;
+    padding: 18px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 17px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    letter-spacing: 0.05em;
+    margin-top: 8px;
+  }
+
+  .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255, 210, 80, 0.35);
+  }
+
+  .submit-btn:active { transform: translateY(0); }
+
+  /* 完了メッセージ */
+  .success-msg {
+    display: none;
+    text-align: center;
+    padding: 40px 24px;
+    animation: fadeDown 0.5s ease both;
+  }
+
+  .success-msg .icon { font-size: 56px; margin-bottom: 16px; }
+  .success-msg h2 { color: var(--gold); font-size: 22px; font-weight: 900; margin-bottom: 12px; }
+  .success-msg p { color: var(--text-light); font-size: 14px; line-height: 1.9; }
+
+  /* フッター */
+  .footer-note {
+    text-align: center;
+    color: rgba(180, 204, 238, 0.5);
+    font-size: 12px;
+    margin-top: 28px;
+    line-height: 1.8;
+    animation: fadeDown 0.6s 0.3s ease both;
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ヘッダー -->
+  <div class="header">
+    <div class="header-badge">✨ 今だけ期間限定価格</div>
+    <h1>お問い合わせ</h1>
+    <p>ホームページ制作に関するご依頼・<br>ご質問はこちらからお気軽にどうぞ</p>
+  </div>
+
+  <!-- 料金サマリー -->
+  <div class="price-summary">
+    <h2>📋 料金表（税込・SEO対策込み）</h2>
+    <div class="price-row"><span>1ページ</span><span class="price">95,000円</span></div>
+    <div class="price-row"><span>3ページ</span><span class="price">150,000円〜</span></div>
+    <div class="price-row"><span>5ページ</span><span class="price">200,000円〜</span></div>
+    <div class="price-note">スマホ対応・Google Maps連携・予約ボタン設置込み</div>
+  </div>
+
+  <!-- フォーム -->
+  <div class="form-card">
+    <form id="contactForm">
+
+      <div class="form-group">
+        <label>お名前 <span class="required">必須</span></label>
+        <input type="text" name="name" placeholder="例：山田 太郎" required>
+      </div>
+
+      <div class="form-group">
+        <label>業種・お店の種類 <span class="required">必須</span></label>
+        <select name="business_type" required>
+          <option value="" disabled selected>選択してください</option>
+          <option>整体院・治療院</option>
+          <option>ネイルサロン</option>
+          <option>カフェ・飲食店</option>
+          <option>居酒屋・バー</option>
+          <option>美容院・サロン</option>
+          <option>その他</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>ご希望のページ数 <span class="required">必須</span></label>
+        <div class="page-options">
+          <div class="page-option">
+            <input type="radio" name="pages" id="p1" value="1ページ（95,000円）">
+            <label for="p1">
+              <span class="pages">1ページ</span>
+              <span class="page-price">95,000円</span>
+            </label>
+          </div>
+          <div class="page-option">
+            <input type="radio" name="pages" id="p3" value="3ページ（150,000円〜）">
+            <label for="p3">
+              <span class="pages">3ページ</span>
+              <span class="page-price">150,000円〜</span>
+            </label>
+          </div>
+          <div class="page-option">
+            <input type="radio" name="pages" id="p5" value="5ページ（200,000円〜）">
+            <label for="p5">
+              <span class="pages">5ページ</span>
+              <span class="page-price">200,000円〜</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>メールアドレス <span class="required">必須</span></label>
+        <input type="email" name="email" placeholder="例：example@gmail.com" required>
+      </div>
+
+      <div class="form-group">
+        <label>電話番号 <span class="required" style="color:var(--text-light)">任意</span></label>
+        <input type="tel" name="tel" placeholder="例：090-0000-0000">
+      </div>
+
+      <div class="form-group">
+        <label>ご質問・ご要望など</label>
+        <textarea name="message" placeholder="現在のホームページの有無、デザインのご希望、納期など、お気軽にお書きください"></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">📩 送信する</button>
+    </form>
+
+    <!-- 完了メッセージ -->
+    <div class="success-msg" id="successMsg">
+      <div class="icon">✅</div>
+      <h2>送信完了しました！</h2>
+      <p>お問い合わせありがとうございます。<br>通常1〜2営業日以内にご返信いたします。<br><br>しばらくお待ちください。</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    実績はプロフィールのURLからご確認いただけます<br>
+    © ホームページ制作サービス
+  </div>
+
+</div>
+
+<script>
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const name    = form.name.value;
+    const biz     = form.business_type.value;
+    const pages   = form.pages.value || '未選択';
+    const email   = form.email.value;
+    const tel     = form.tel.value || '未記入';
+    const message = form.message.value || '特になし';
+
+    // Formspree経由でメール送信（無料・登録不要）
+    const body = encodeURIComponent(
+      `【ホームページ制作お問い合わせ】\n\n` +
+      `お名前：${name}\n` +
+      `業種：${biz}\n` +
+      `ご希望ページ数：${pages}\n` +
+      `メール：${email}\n` +
+      `電話：${tel}\n\n` +
+      `ご質問・ご要望：\n${message}`
+    );
+
+    // mailto で送信（サーバー不要・確実）
+    const mailto = `mailto:kokoro010361113@gmail.com` +
+      `?subject=${encodeURIComponent('【HP制作お問い合わせ】' + name + '様より')}` +
+      `&body=${body}`;
+
+    window.location.href = mailto;
+
+    // 完了メッセージ表示
+    setTimeout(() => {
+      form.style.display = 'none';
+      document.getElementById('successMsg').style.display = 'block';
+    }, 800);
+  });
+</script>
+</body>
+</html>
