@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="こころのトーク — LINEで使える日本語専用AI相談アプリ。24時間365日、心の対話をお届けします。月額980円〜。">
   <meta name="keywords" content="メンタルサポート,AI,LINE,心理,カウンセリング,こころのトーク,consultation">
-  <meta property="og:title" content="こころのトーク ">
+  <meta property="og:title" content="こころのトーク ～いつもそばにいるよ～">
   <meta property="og:description" content="LINEで使える日本語専用AI相談アプリ。月額980円から。">
   <meta property="og:type" content="website">
   <meta name="robots" content="index, follow">
@@ -62,7 +62,7 @@
       height: 72px; position: sticky; top: 0; z-index: 100;
       box-shadow: 0 2px 12px rgba(180,120,40,0.08);
     }
-    .nav-logo { font-family: 'Shippori Mincho', serif; font-size: 1.3rem; font-weight: 700; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+    .nav-logo { font-family: 'Shippori Mincho', serif; font-size: 1.3rem; font-weight: 700; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 10px; white-space: nowrap; flex-wrap: nowrap; }
     .nav-icon { width: 40px; height: 40px; object-fit: contain; }
     .nav-logo span { color: var(--gold); }
     .nav-links { display: flex; gap: 36px; list-style: none; }
@@ -267,20 +267,6 @@
     .p-btn-gold { background: var(--gold); color: var(--white); border-radius: 4px; }
     .p-btn:hover { opacity: 0.85; }
 
-    /* TECH */
-    .tech-wrap { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
-    .tech-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 3px; }
-    .tech-cell {
-      background: var(--white); border: 1px solid var(--border);
-      padding: 30px 24px; text-align: center;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .tech-cell:hover { border-color: var(--gold); background: var(--gold-l); }
-    .tech-name { font-family: 'Shippori Mincho', serif; font-size: 1.05rem; font-weight: 700; color: var(--text); display: block; margin-bottom: 5px; }
-    .tech-role { font-size: 0.7rem; color: var(--text3); font-weight: 500; letter-spacing: 0.08em; }
-    .tech-sub { font-size: 0.88rem; color: var(--text2); line-height: 2.1; margin-top: 18px; }
-    .tech-sub-en { font-size: 0.82rem; color: var(--text3); font-style: italic; margin-top: 10px; }
-
     /* QUOTE */
     .quote-wrap { max-width: 760px; margin: 0 auto; text-align: center; }
     .q-mark { font-family: 'Shippori Mincho', serif; font-size: 6rem; font-weight: 700; color: var(--beige2); line-height: 0.4; display: block; margin-bottom: 40px; }
@@ -321,7 +307,9 @@
     .reveal.in { opacity: 1; transform: none; }
 
     @media (max-width: 1024px) {
-      nav { padding: 0 24px; }
+      nav { padding: 0 16px; }
+      .nav-logo { font-size: 1.1rem; white-space: nowrap; }
+      .nav-icon { width: 32px; height: 32px; }
       .nav-links { display: none; }
       .hero { padding: 80px 24px 70px; }
       .section { padding: 72px 24px; }
@@ -551,8 +539,6 @@
   <div class="foot-col">
     <h4>Contact</h4>
     <a href="faq.html">FAQ</a>
-    <a href="/cdn-cgi/l/email-protection#0c676367637e633c3d3c3f3a3d3d3d3f4c6b616d6560226f6361">お問い合わせ</a>
-    <a href="/cdn-cgi/l/email-protection#49222622263b267978797a7f7878787a092e24282025672a2624"><span class="__cf_email__" data-cfemail="e8838783879a87d8d9d8dbded9d9d9dba88f85898184c68b8785">[email&#160;protected]</span></a>
   </div>
   <div class="foot-bar">
     <p>© 2025 こころのトーク（遠藤多恵子）. All rights reserved.</p>
@@ -560,5 +546,5 @@
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  const ob
+</body>
+</html>
