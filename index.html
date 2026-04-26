@@ -267,6 +267,20 @@
     .p-btn-gold { background: var(--gold); color: var(--white); border-radius: 4px; }
     .p-btn:hover { opacity: 0.85; }
 
+    /* TECH */
+    .tech-wrap { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
+    .tech-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 3px; }
+    .tech-cell {
+      background: var(--white); border: 1px solid var(--border);
+      padding: 30px 24px; text-align: center;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .tech-cell:hover { border-color: var(--gold); background: var(--gold-l); }
+    .tech-name { font-family: 'Shippori Mincho', serif; font-size: 1.05rem; font-weight: 700; color: var(--text); display: block; margin-bottom: 5px; }
+    .tech-role { font-size: 0.7rem; color: var(--text3); font-weight: 500; letter-spacing: 0.08em; }
+    .tech-sub { font-size: 0.88rem; color: var(--text2); line-height: 2.1; margin-top: 18px; }
+    .tech-sub-en { font-size: 0.82rem; color: var(--text3); font-style: italic; margin-top: 10px; }
+
     /* QUOTE */
     .quote-wrap { max-width: 760px; margin: 0 auto; text-align: center; }
     .q-mark { font-family: 'Shippori Mincho', serif; font-size: 6rem; font-weight: 700; color: var(--beige2); line-height: 0.4; display: block; margin-bottom: 40px; }
@@ -340,13 +354,33 @@
   <span class="hero-tag">AI 相談アプリ · LINE</span>
   <h1 class="hero-title">こころのトーク</h1>
   <p class="hero-catch">～いつもそばにいるよ～</p>
-  <p class="hero-desc" style="font-size:1.15rem; margin-bottom:28px;">
+  <p class="hero-desc" style="font-size:1.15rem; margin-bottom:20px;">
     人は誰でも、心のどこかに孤独を抱えています。<br>
     誰かに話せる人も、話せない人も。<br>
     ただ、そばにいてほしいとき。<br>
     このサービスは、そのために作りました。
   </p>
+  <p style="font-family:'Shippori Mincho',serif; font-size:clamp(0.75rem,1.5vw,0.95rem); color:#b07828; letter-spacing:0.3em; margin-bottom:16px; font-weight:700;">
+    一般的なAIにはない、4つのこだわり。
+  </p>
+  <div style="display:inline-flex; flex-direction:column; gap:10px; margin-bottom:36px; text-align:left;">
+    <p style="font-family:'Shippori Mincho',serif; font-size:clamp(1rem,2vw,1.25rem); color:#5c4a35; letter-spacing:0.1em;">✦ 説教しない。</p>
+    <p style="font-family:'Shippori Mincho',serif; font-size:clamp(1rem,2vw,1.25rem); color:#5c4a35; letter-spacing:0.1em;">✦ 質問攻めにしない。</p>
+    <p style="font-family:'Shippori Mincho',serif; font-size:clamp(1rem,2vw,1.25rem); color:#5c4a35; letter-spacing:0.1em;">✦ 回りくどくない。</p>
+    <p style="font-family:'Shippori Mincho',serif; font-size:clamp(1rem,2vw,1.25rem); color:#5c4a35; letter-spacing:0.1em;">✦ 嘘をつかない。</p>
+  </div>
   <p style="display:inline-block; background:#e07b00; color:#fff; font-size:1rem; font-weight:bold; border-radius:4px; padding:12px 28px; margin-bottom:32px; letter-spacing:0.08em;">🎁 今だけ — 最初の5回、無料でお試しいただけます</p>
+  <div style="max-width:580px; margin:0 auto 40px; background:#fff; border-left:4px solid #b07828; padding:24px 28px; text-align:left; border-radius:0 8px 8px 0;">
+    <p style="font-family:'Shippori Mincho',serif; font-size:0.8rem; color:#b07828; letter-spacing:0.2em; margin-bottom:12px; font-weight:700;">このアプリを作った理由</p>
+    <p style="font-size:0.95rem; color:#5c4a35; line-height:2;">
+      私自身が無料のAIに傷ついた経験があるからです。<br>
+      一番傷ついたのは、嘘をつかれたことでした。<br>
+      質問攻めにされて、説教されて、回りくどい返答をされて。<br>
+      だから作りました。<br>
+      嘘をつかない。質問攻めにしない。説教しない。回りくどくない。<br>
+      そういうAIを。
+    </p>
+  </div>
   <p class="hero-desc" style="font-size:0.95rem; margin-bottom:8px;">
     PayPal決済のみで完結するので、誰にも知られずに使えます。<br>
     AIエージェントにも対応した本格設計。海外では月額<strong>$299.99</strong>で提供しているシステムを、<br>
@@ -539,6 +573,8 @@
   <div class="foot-col">
     <h4>Contact</h4>
     <a href="faq.html">FAQ</a>
+    <a href="/cdn-cgi/l/email-protection#0c676367637e633c3d3c3f3a3d3d3d3f4c6b616d6560226f6361">お問い合わせ</a>
+    <a href="/cdn-cgi/l/email-protection#49222622263b267978797a7f7878787a092e24282025672a2624"><span class="__cf_email__" data-cfemail="e8838783879a87d8d9d8dbded9d9d9dba88f85898184c68b8785">[email&#160;protected]</span></a>
   </div>
   <div class="foot-bar">
     <p>© 2025 こころのトーク（遠藤多恵子）. All rights reserved.</p>
@@ -546,5 +582,5 @@
   </div>
 </footer>
 
-</body>
-</html>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const ob
