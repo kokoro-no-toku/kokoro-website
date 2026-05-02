@@ -4,7 +4,7 @@
   <!-- ホームページ -->
   <url>
     <loc>https://kokoro-no-toku.github.io/kokoro-website/</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-05-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -12,7 +12,7 @@
   <!-- FAQ -->
   <url>
     <loc>https://kokoro-no-toku.github.io/kokoro-website/faq.html</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-05-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -20,7 +20,7 @@
   <!-- APIドキュメント -->
   <url>
     <loc>https://kokoro-no-toku.github.io/kokoro-website/api.html</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-05-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -28,7 +28,7 @@
   <!-- 利用規約 -->
   <url>
     <loc>https://kokoro-no-toku.github.io/kokoro-website/terms.html</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-05-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
