@@ -10,384 +10,389 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --cream:  #fdf8f2;
-      --beige:  #f5ede0;
-      --beige2: #ede0ce;
-      --white:  #ffffff;
-      --border: #ddc9b0;
-      --text:   #2c1f10;
-      --text2:  #5c4a35;
-      --text3:  #9a8070;
-      --gold:   #b07828;
-      --gold-l: #f0e0c0;
-      --green:  #00a850;
-      --line:   #00b900;
-      --accent: #c85a20;
-      --navy:   #1f3a4d;
+      --bg:      #ffffff;
+      --bg2:     #f2f5f9;
+      --ink:     #16233a;
+      --ink2:    #4c5a70;
+      --ink3:    #94a0b4;
+      --navy:    #1e3a5f;
+      --blue:    #2563eb;
+      --blue-l:  #e4ecfd;
+      --line:    #e4e9f1;
+      --white:   #ffffff;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Noto Sans JP', sans-serif; background: var(--cream); color: var(--text); line-height: 1.8; }
+    body { font-family: 'Zen Kaku Gothic New', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.85; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    a { color: inherit; }
+    svg { display: block; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(36px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes floatBlob { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-3%,4%) scale(1.06); } }
+    @keyframes floatBlob2 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(4%,-5%) scale(1.08); } }
+    @keyframes pulseGlow { 0%,100% { box-shadow: 0 8px 24px rgba(37,99,235,0.25); } 50% { box-shadow: 0 10px 34px rgba(37,99,235,0.42); } }
+
+    .anim { opacity: 0; animation: fadeUp 0.9s cubic-bezier(.2,.8,.2,1) forwards; }
+    .anim-1 { animation-delay: 0.05s; }
+    .anim-2 { animation-delay: 0.28s; }
+    .anim-3 { animation-delay: 0.5s; }
+    .anim-4 { animation-delay: 0.72s; }
+    .anim-5 { animation-delay: 0.9s; }
+    .reveal { opacity: 0; transform: translateY(34px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      .anim, .reveal, .blob { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
+    }
+
     nav {
-      background: var(--white);
-      border-bottom: 3px solid var(--gold);
-      padding: 0 60px;
+      background: rgba(255,255,255,0.94); backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--line);
+      padding: 0 56px;
       display: flex; align-items: center; justify-content: space-between;
-      height: 72px; position: sticky; top: 0; z-index: 100;
-      box-shadow: 0 2px 12px rgba(180,120,40,0.08);
+      height: 76px; position: sticky; top: 0; z-index: 100;
     }
-    .nav-logo { font-family: 'Shippori Mincho', serif; font-size: 1.3rem; font-weight: 700; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 10px; white-space: nowrap; }
-    .nav-icon { width: 40px; height: 40px; object-fit: contain; }
-    .nav-logo span { color: var(--gold); }
-    .nav-for-biz { font-size: 0.68rem; font-weight: 700; color: var(--navy); background: var(--beige2); padding: 3px 10px; letter-spacing: 0.1em; margin-left: 4px; }
-    .nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
-    .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--text2); text-decoration: none; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--gold); }
-    .nav-cta { background: var(--navy); color: #fff !important; padding: 10px 24px; border-radius: 4px; font-weight: 700 !important; transition: opacity 0.2s; }
-    .nav-cta:hover { opacity: 0.85; }
+    .nav-logo { font-weight: 700; font-size: 1.1rem; color: var(--ink); text-decoration: none; display: flex; align-items: center; gap: 12px; white-space: nowrap; }
+    .nav-logo img { width: 34px; height: 34px; object-fit: contain; }
+    .nav-for-biz { font-size: 0.6rem; font-weight: 700; color: var(--navy); background: var(--blue-l); letter-spacing: 0.1em; padding: 4px 10px; border-radius: 4px; }
+    .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+    .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--ink2); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--blue); }
+    .nav-cta { color: var(--white) !important; background: var(--blue); padding: 11px 22px; border-radius: 6px; font-weight: 700 !important; }
+    .nav-cta:hover { background: var(--navy); }
 
-    .hero {
-      background: linear-gradient(160deg, #fdf3e3 0%, #f5e8d0 50%, #ede0c4 100%);
-      border-bottom: 3px solid var(--border);
-      padding: 100px 60px 80px;
-      text-align: center;
-      position: relative; overflow: hidden;
-    }
-    .hero::before {
-      content: '守';
-      position: absolute; font-family: 'Shippori Mincho', serif;
-      font-size: 26rem; font-weight: 700;
-      color: rgba(31,58,77,0.05);
-      top: 50%; left: 50%; transform: translate(-50%,-50%);
-      pointer-events: none; user-select: none;
-    }
-    .hero-badge { display: inline-block; background: var(--navy); color: var(--white); font-size: 0.72rem; font-weight: 700; padding: 6px 22px; letter-spacing: 0.25em; margin-bottom: 28px; }
-    .hero-title { font-family: 'Shippori Mincho', serif; font-size: clamp(1.9rem, 4.6vw, 3.6rem); font-weight: 700; color: var(--text); line-height: 1.5; margin-bottom: 20px; letter-spacing: 0.02em; position: relative; }
-    .hero-title em { font-style: normal; color: var(--gold); }
-    .hero-catch { font-size: 1.05rem; color: var(--text2); line-height: 2.1; max-width: 600px; margin: 0 auto 40px; }
-    .hero-stats { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 44px; }
-    .hstat { background: var(--white); border: 1.5px solid var(--border); padding: 18px 26px; min-width: 168px; }
-    .hstat b { display: block; font-family: 'Shippori Mincho', serif; font-size: 1.5rem; color: var(--navy); margin-bottom: 4px; }
-    .hstat span { font-size: 0.76rem; color: var(--text3); }
-    .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-    .btn-navy { background: var(--navy); color: var(--white); font-size: 1rem; font-weight: 700; padding: 18px 44px; text-decoration: none; border-radius: 4px; letter-spacing: 0.08em; transition: opacity 0.2s; display: inline-block; }
-    .btn-navy:hover { opacity: 0.85; }
-    .btn-outline { background: transparent; color: var(--text2); border: 1.5px solid var(--text2); font-size: 0.95rem; font-weight: 700; padding: 17px 40px; text-decoration: none; border-radius: 4px; letter-spacing: 0.06em; transition: all 0.2s; display: inline-block; }
-    .btn-outline:hover { background: var(--text2); color: var(--white); }
+    .hero-wrap { position: relative; overflow: hidden; background: linear-gradient(180deg, #eef3fb 0%, #ffffff 100%); }
+    .blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.55; pointer-events: none; }
+    .blob-1 { width: 420px; height: 420px; background: #bcd2fb; top: -140px; left: -120px; animation: floatBlob 14s ease-in-out infinite; }
+    .blob-2 { width: 360px; height: 360px; background: #dbe6fd; bottom: -160px; right: -100px; animation: floatBlob2 16s ease-in-out infinite; }
 
-    .section { padding: 88px 60px; }
-    .section-white { background: var(--white); }
-    .section-beige { background: var(--beige); }
-    .lbl { display: inline-block; font-size: 0.7rem; font-weight: 700; color: var(--gold); letter-spacing: 0.3em; text-transform: uppercase; border-bottom: 2px solid var(--gold); padding-bottom: 4px; margin-bottom: 18px; }
-    .sec-title { font-family: 'Shippori Mincho', serif; font-size: clamp(1.6rem, 2.8vw, 2.3rem); font-weight: 700; color: var(--text); line-height: 1.5; margin-bottom: 12px; }
-    .sec-lead { font-size: 0.95rem; color: var(--text2); max-width: 640px; margin: 0 auto 52px; }
-    .center { text-align: center; }
+    .hero { position: relative; padding: 96px 56px 100px; max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 60px; align-items: center; }
+    .hero-badge { display: inline-block; background: var(--blue-l); color: var(--navy); font-size: 0.75rem; font-weight: 700; padding: 7px 16px; border-radius: 6px; margin-bottom: 24px; letter-spacing: 0.02em; }
+    .hero-logo { width: 52px; height: 52px; object-fit: contain; margin-bottom: 20px; }
+    .hero-title { font-weight: 900; font-size: clamp(2rem, 3.6vw, 2.9rem); line-height: 1.55; color: var(--ink); margin-bottom: 26px; }
+    .hero-title .accent { color: var(--blue); }
+    .hero-catch { font-size: 1rem; color: var(--ink2); line-height: 2.1; margin-bottom: 40px; max-width: 460px; }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
+    .btn-blue { background: var(--blue); color: var(--white); font-size: 0.94rem; font-weight: 700; padding: 16px 32px; text-decoration: none; border-radius: 6px; display: inline-block; transition: background 0.2s, transform 0.2s; animation: pulseGlow 3s ease-in-out infinite; }
+    .btn-blue:hover { background: var(--navy); transform: translateY(-2px); }
+    .btn-out { border: 1.5px solid var(--ink3); color: var(--ink2); font-size: 0.94rem; font-weight: 700; padding: 14.5px 30px; text-decoration: none; border-radius: 6px; display: inline-block; transition: all 0.2s; background: rgba(255,255,255,0.6); }
+    .btn-out:hover { border-color: var(--blue); color: var(--blue); }
+    .hero-stats { display: flex; gap: 36px; flex-wrap: wrap; }
+    .hs b { display: block; font-weight: 900; font-size: 1.5rem; color: var(--navy); }
+    .hs span { font-size: 0.76rem; color: var(--ink3); }
 
-    .pain-grid { max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: repeat(2,1fr); gap: 2px; background: var(--border); }
-    .pain-card { background: var(--white); padding: 32px 36px; display: flex; gap: 18px; align-items: flex-start; }
-    .pain-mark { font-family: 'Shippori Mincho', serif; font-size: 1.6rem; color: var(--gold); flex-shrink: 0; }
-    .pain-card p { font-size: 0.92rem; color: var(--text2); }
+    .hero-photo-wrap { position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 4/5; background: linear-gradient(160deg, var(--blue-l), #c9dafc); box-shadow: 0 24px 60px rgba(30,58,95,0.18); }
+    .hero-photo-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-photo-wrap img.broken { display: none; }
+    .hero-photo-caption { position: absolute; left: 20px; bottom: 20px; background: rgba(255,255,255,0.9); backdrop-filter: blur(4px); border-radius: 10px; padding: 12px 16px; font-size: 0.78rem; color: var(--ink2); max-width: 220px; }
 
-    .feat-wrap { max-width: 1180px; margin: 0 auto; }
-    .feat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 3px; }
-    .feat-card { background: var(--white); padding: 42px 32px; border-top: 3px solid transparent; transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; }
-    .feat-card:hover { border-top-color: var(--navy); transform: translateY(-4px); box-shadow: 0 8px 24px rgba(31,58,77,0.08); }
-    .feat-num { font-size: 0.7rem; font-weight: 700; color: var(--navy); letter-spacing: 0.25em; margin-bottom: 14px; display: block; }
-    .feat-title { font-family: 'Shippori Mincho', serif; font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 12px; }
-    .feat-body { font-size: 0.86rem; color: var(--text2); line-height: 2; }
+    .section { padding: 88px 56px; }
+    .section-tint { background: var(--bg2); }
+    .inner { max-width: 1040px; margin: 0 auto; }
+    .head { text-align: center; margin-bottom: 52px; }
+    .eyebrow { display: inline-block; font-size: 0.72rem; font-weight: 700; color: var(--blue); letter-spacing: 0.18em; margin-bottom: 16px; }
+    .h2 { font-weight: 900; font-size: clamp(1.5rem, 2.6vw, 2.1rem); line-height: 1.6; color: var(--ink); }
+    .lead { font-size: 0.9rem; color: var(--ink2); margin-top: 16px; max-width: 520px; margin-left: auto; margin-right: auto; line-height: 2; }
 
-    .flow-wrap { max-width: 920px; margin: 0 auto; }
-    .flow-row { display: flex; gap: 0; align-items: stretch; }
-    .flow-step { flex: 1; background: var(--white); border: 1.5px solid var(--border); padding: 32px 20px; text-align: center; position: relative; }
-    .flow-step + .flow-step { margin-left: -1px; }
-    .flow-step .fn { font-family: 'Shippori Mincho', serif; font-size: 2rem; font-weight: 700; color: transparent; -webkit-text-stroke: 1.5px var(--gold); display: block; margin-bottom: 10px; }
-    .flow-step h4 { font-size: 0.92rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
-    .flow-step p { font-size: 0.78rem; color: var(--text3); line-height: 1.8; }
-    @media (max-width: 900px) {
-      .flow-row { flex-direction: column; }
-      .flow-step + .flow-step { margin-left: 0; margin-top: -1px; }
-    }
+    .issue-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+    .issue-card { background: var(--white); padding: 30px 32px; display: flex; gap: 18px; align-items: flex-start; }
+    .issue-num { font-weight: 900; font-size: 0.95rem; color: var(--blue); flex-shrink: 0; }
+    .issue-card p { font-size: 0.9rem; color: var(--ink2); line-height: 1.95; }
 
-    .priv-wrap { max-width: 880px; margin: 0 auto; background: var(--white); border: 1.5px solid var(--border); padding: 48px 52px; }
-    .priv-wrap h3 { font-family: 'Shippori Mincho', serif; font-size: 1.2rem; margin-bottom: 20px; color: var(--text); }
+    .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+    .feat-card { background: var(--white); padding: 34px 30px; transition: background 0.25s; }
+    .feat-card:hover { background: var(--blue-l); }
+    .feat-icon { width: 38px; height: 38px; margin-bottom: 20px; color: var(--blue); }
+    .feat-card h3 { font-weight: 700; font-size: 1rem; color: var(--ink); margin-bottom: 10px; }
+    .feat-card p { font-size: 0.84rem; color: var(--ink2); line-height: 1.95; }
+
+    .flow-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+    .flow-card { text-align: center; padding: 8px 14px; position: relative; }
+    .flow-card:not(:last-child)::after { content: ''; position: absolute; top: 22px; right: -8px; width: 16px; height: 1px; background: var(--ink3); }
+    .flow-num { width: 44px; height: 44px; border-radius: 50%; background: var(--blue-l); color: var(--navy); font-weight: 900; font-size: 1.05rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; }
+    .flow-card h4 { font-weight: 700; font-size: 0.92rem; margin-bottom: 8px; }
+    .flow-card p { font-size: 0.78rem; color: var(--ink2); line-height: 1.85; }
+
+    .priv-wrap { max-width: 720px; margin: 0 auto; }
     .priv-list { list-style: none; }
-    .priv-list li { font-size: 0.9rem; color: var(--text2); padding: 13px 0; border-bottom: 1px solid var(--border); display: flex; gap: 12px; align-items: flex-start; }
-    .priv-list li:last-child { border-bottom: none; }
-    .priv-list li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+    .priv-list li { font-size: 0.9rem; color: var(--ink2); padding: 18px 0; border-bottom: 1px solid var(--line); display: flex; gap: 14px; align-items: flex-start; line-height: 1.9; }
+    .priv-list li:first-child { border-top: 1px solid var(--line); }
+    .priv-check { color: var(--blue); font-weight: 900; flex-shrink: 0; }
 
-    .pricing-wrap { max-width: 1040px; margin: 0 auto; }
-    .pricing-table { width: 100%; border-collapse: collapse; background: var(--white); box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
-    .pricing-table th, .pricing-table td { padding: 20px 22px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
-    .pricing-table thead th { background: var(--navy); color: var(--white); font-weight: 700; letter-spacing: 0.05em; font-size: 0.82rem; }
-    .pricing-table tbody tr:last-child td { border-bottom: none; }
-    .pricing-table tbody tr:hover { background: var(--beige); }
-    .pricing-table .amt { font-family: 'Shippori Mincho', serif; font-weight: 700; color: var(--navy); font-size: 1.1rem; }
-    .pricing-note { font-size: 0.78rem; color: var(--text3); margin-top: 18px; text-align: center; }
-    .pricing-cta { text-align: center; margin-top: 40px; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; max-width: 980px; margin: 0 auto; }
+    .p-card { background: var(--white); padding: 34px 28px; text-align: center; }
+    .p-card.mid { background: var(--blue-l); }
+    .p-tag { font-size: 0.72rem; color: var(--ink3); margin-bottom: 6px; letter-spacing: 0.08em; }
+    .p-range { font-weight: 900; font-size: 1.15rem; margin-bottom: 18px; }
+    .p-amt { font-weight: 900; font-size: 1.3rem; color: var(--navy); margin-bottom: 8px; }
+    .p-use { font-size: 0.79rem; color: var(--ink2); }
+    .pricing-note { text-align: center; font-size: 0.79rem; color: var(--ink3); margin-top: 28px; line-height: 1.9; }
+    .pricing-cta { text-align: center; margin-top: 36px; }
 
-    .contact-wrap { max-width: 640px; margin: 0 auto; text-align: center; }
-    .contact-box { background: var(--white); border: 1.5px solid var(--border); padding: 48px 40px; margin-top: 8px; }
-    .contact-box p { font-size: 0.9rem; color: var(--text2); margin-bottom: 28px; }
+    .contact-box { max-width: 640px; margin: 0 auto; text-align: center; background: var(--bg2); border: 1px solid var(--line); border-radius: 12px; padding: 52px 44px; }
+    .contact-box p { font-size: 0.9rem; color: var(--ink2); line-height: 2; margin-bottom: 30px; }
 
-    footer { background: #2c1f10; border-top: 4px solid var(--gold); padding: 72px 60px 0; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; }
-    .foot-logo { font-family: 'Shippori Mincho', serif; font-size: 1.3rem; font-weight: 700; color: var(--white); text-decoration: none; display: block; margin-bottom: 14px; }
-    .foot-logo span { color: var(--gold); }
-    .foot-desc { font-size: 0.8rem; color: #9a8070; line-height: 2.1; max-width: 280px; }
-    .foot-col h4 { font-size: 0.7rem; font-weight: 700; color: var(--gold); letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 18px; }
-    .foot-col a { display: block; font-size: 0.8rem; color: #9a8070; text-decoration: none; margin-bottom: 10px; transition: color 0.2s; }
-    .foot-col a:hover { color: var(--white); }
-    .foot-bar { border-top: 1px solid #3c2c1a; margin: 48px -60px 0; padding: 20px 60px; display: flex; justify-content: space-between; align-items: center; }
-    .foot-bar p { font-size: 0.72rem; color: #5c4030; letter-spacing: 0.06em; }
+    footer { background: var(--bg2); border-top: 1px solid var(--line); padding: 64px 56px 0; }
+    .foot-grid { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 44px; }
+    .foot-logo { font-weight: 700; font-size: 1.05rem; color: var(--ink); text-decoration: none; display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .foot-logo img { width: 28px; height: 28px; object-fit: contain; }
+    .foot-desc { font-size: 0.78rem; color: var(--ink2); line-height: 2; max-width: 260px; }
+    .foot-col h4 { font-size: 0.66rem; font-weight: 700; color: var(--navy); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 18px; }
+    .foot-col a { display: block; font-size: 0.78rem; color: var(--ink2); text-decoration: none; margin-bottom: 11px; }
+    .foot-col a:hover { color: var(--blue); }
+    .foot-bar { max-width: 1080px; margin: 44px auto 0; border-top: 1px solid var(--line); padding: 20px 0; }
+    .foot-bar p { font-size: 0.7rem; color: var(--ink3); }
 
-    @media (max-width: 1024px) {
-      nav { padding: 0 16px; }
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; text-align: center; padding: 64px 22px 60px; }
+      .hero-catch { margin-left: auto; margin-right: auto; }
+      .hero-btns, .hero-stats { justify-content: center; }
+      .hero-photo-wrap { max-width: 420px; margin: 0 auto; aspect-ratio: 4/3; }
+      .issue-grid, .feat-grid, .pricing-grid { grid-template-columns: 1fr; }
+      .flow-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+      .flow-card::after { display: none; }
+    }
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; }
       .nav-links { display: none; }
-      .hero { padding: 76px 22px 60px; }
-      .section { padding: 64px 22px; }
-      .pain-grid { grid-template-columns: 1fr; }
-      .feat-grid { grid-template-columns: 1fr; }
-      .pricing-table { font-size: 0.82rem; }
-      footer { grid-template-columns: 1fr 1fr; padding: 56px 22px 0; }
-      .foot-bar { margin: 40px -22px 0; padding: 20px 22px; flex-direction: column; gap: 8px; }
-      .priv-wrap { padding: 36px 26px; }
+      .section { padding: 60px 20px; }
+      .foot-grid { grid-template-columns: 1fr 1fr; padding: 0 20px; }
+      footer { padding: 48px 0 0; }
     }
   </style>
 </head>
 <body>
 
 <nav role="navigation" aria-label="メインナビゲーション">
-  <a href="index.html" class="nav-logo"><img src="logo.png" alt="" class="nav-icon">こころの<span>トーク</span><span class="nav-for-biz">for Business</span></a>
+  <a href="index.html" class="nav-logo"><img src="logo.png" alt="こころのトーク">こころのトーク<span class="nav-for-biz">FOR BUSINESS</span></a>
   <ul class="nav-links" role="list">
     <li><a href="#issues">課題</a></li>
     <li><a href="#features">できること</a></li>
     <li><a href="#pricing">料金</a></li>
-    <li><a href="#contact" class="nav-cta">資料請求・お問い合わせ</a></li>
+    <li><a href="#contact" class="nav-cta">お問い合わせ</a></li>
   </ul>
 </nav>
 
-<section class="hero" aria-label="メインビジュアル">
-  <span class="hero-badge">法人・団体様向け</span>
-  <h1 class="hero-title">従業員のこころに、<br><em>いちばん近い窓口</em>を。</h1>
-  <p class="hero-catch">
-    こころのトーク for Business は、LINEひとつで始められる従業員向けAI相談サービスです。<br>
-    招待リンクを配るだけで導入でき、個々の会話内容は会社側に開示されません。<br>
-    24時間365日、誰にも知られずに話せる場所を、従業員の皆さまに。
-  </p>
-  <div class="hero-stats">
-    <div class="hstat"><b>24h</b><span>365日 いつでも相談可能</span></div>
-    <div class="hstat"><b>招待制</b><span>リンクひとつで導入完了</span></div>
-    <div class="hstat"><b>匿名集計</b><span>個々の会話内容は非開示</span></div>
-  </div>
-  <div class="hero-btns">
-    <a href="#contact" class="btn-navy">資料請求・お問い合わせ →</a>
-    <a href="#pricing" class="btn-outline">料金を見る</a>
-  </div>
-</section>
+<div class="hero-wrap">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <section class="hero" aria-label="メインビジュアル">
+    <div>
+      <img src="logo.png" alt="こころのトーク" class="hero-logo anim anim-1">
+      <span class="hero-badge anim anim-1">法人・団体様向け</span>
+      <h1 class="hero-title anim anim-2">従業員のこころに、<br><span class="accent">いちばん近い窓口</span>を。</h1>
+      <p class="hero-catch anim anim-3">
+        LINEひとつで始められる、従業員向けAI相談サービス。招待リンクを配るだけで導入でき、個々の会話内容は会社側に開示されません。
+      </p>
+      <div class="hero-btns anim anim-4">
+        <a href="#contact" class="btn-blue">お問い合わせ →</a>
+        <a href="#pricing" class="btn-out">料金を見る</a>
+      </div>
+      <div class="hero-stats anim anim-5">
+        <div class="hs"><b>24時間</b><span>いつでも相談OK</span></div>
+        <div class="hs"><b>365日</b><span>土日祝も対応</span></div>
+        <div class="hs"><b>匿名集計</b><span>個人の会話は非開示</span></div>
+      </div>
+    </div>
 
-<section class="section section-white" id="issues" aria-labelledby="issues-h">
-  <div class="center">
-    <span class="lbl">Issues</span>
-    <h2 class="sec-title" id="issues-h">こんなお悩みはありませんか</h2>
-    <p class="sec-lead">相談窓口の設置は必要だと分かっていても、実際に整えるとなると壁があります。</p>
-  </div>
-  <div class="pain-grid">
-    <div class="pain-card">
-      <span class="pain-mark">一</span>
-      <p>ハラスメント相談窓口を設置したいが、社内で担当者を割く余裕がない。</p>
+    <div class="hero-photo-wrap anim anim-3">
+      <!-- ★ここに写真を入れられます★
+           Unsplash（https://unsplash.com）やPexels（https://pexels.com）で
+           「office team」などで検索し、無料の写真をダウンロードして
+           「hero-photo.jpg」という名前でこのファイルと同じフォルダに置くと、
+           自動的にここに表示されます。写真が無い間はグラデーションのみ表示されます。 -->
+      <img src="hero-photo.jpg" alt="" onerror="this.classList.add('broken')">
+      <div class="hero-photo-caption">従業員一人ひとりに、安心して話せる場所を。</div>
     </div>
-    <div class="pain-card">
-      <span class="pain-mark">二</span>
-      <p>産業医・EAPサービスは効果的だが、費用が高く、利用頻度も限られている。</p>
-    </div>
-    <div class="pain-card">
-      <span class="pain-mark">三</span>
-      <p>従業員が「会社に知られたくない」と感じ、既存の相談窓口を使いたがらない。</p>
-    </div>
-    <div class="pain-card">
-      <span class="pain-mark">四</span>
-      <p>離職やメンタル不調の予兆を、早い段階でつかむ手段がない。</p>
-    </div>
-  </div>
-</section>
+  </section>
+</div>
 
-<section class="section section-beige" id="features" aria-labelledby="feat-h">
-  <div class="feat-wrap">
-    <div class="center">
-      <span class="lbl">Features</span>
-      <h2 class="sec-title" id="feat-h">こころのトーク for Business でできること</h2>
-      <p class="sec-lead">導入のしやすさと、従業員が安心して使える設計を、両立させました。</p>
+<section class="section section-tint" id="issues" aria-labelledby="issues-h">
+  <div class="inner">
+    <div class="head reveal">
+      <span class="eyebrow">ISSUES</span>
+      <h2 class="h2" id="issues-h">こんなお悩みはありませんか</h2>
+      <p class="lead">相談窓口の設置は必要だと分かっていても、実際に整えるとなると壁があります。</p>
     </div>
-    <div class="feat-grid">
-      <article class="feat-card">
-        <span class="feat-num">01</span>
-        <h3 class="feat-title">招待リンクで、すぐに導入</h3>
-        <p class="feat-body">管理者が招待リンクを発行し、従業員がLINEで「こころのトーク」を友だち追加するだけ。専用アプリのインストールやID発行は不要です。</p>
-      </article>
-      <article class="feat-card">
-        <span class="feat-num">02</span>
-        <h3 class="feat-title">会話内容は、会社に開示されません</h3>
-        <p class="feat-body">従業員一人ひとりの会話内容は暗号化して保存され、会社側が閲覧することはできません。ご提供するのは、個人が特定されない範囲の匿名集計データのみです。</p>
-      </article>
-      <article class="feat-card">
-        <span class="feat-num">03</span>
-        <h3 class="feat-title">利用状況を、定期的にレポート</h3>
-        <p class="feat-body">利用人数・利用回数といった集計情報を、あらかじめ定めた周期でご担当者へお届けします。組織全体の傾向把握にお役立てください。</p>
-      </article>
-      <article class="feat-card">
-        <span class="feat-num">04</span>
-        <h3 class="feat-title">従業員数に応じた料金</h3>
-        <p class="feat-body">利用人数の規模に応じた段階的な料金プランをご用意しています。小規模な部署単位のお試し導入から、全社導入までご相談いただけます。</p>
-      </article>
-      <article class="feat-card">
-        <span class="feat-num">05</span>
-        <h3 class="feat-title">24時間365日、対応</h3>
-        <p class="feat-body">相談窓口の対応時間を気にする必要はありません。深夜でも休日でも、従業員が話したいと思ったときに、いつでも応答します。</p>
-      </article>
-      <article class="feat-card">
-        <span class="feat-num">06</span>
-        <h3 class="feat-title">安全性を重視した設計</h3>
-        <p class="feat-body">招待の仕組みには有効期限・使い回し防止・不正アクセス対策を組み込んでいます。大切な情報を預かる仕組みとして、セキュリティを重視して開発しています。</p>
-      </article>
+    <div class="issue-grid reveal">
+      <div class="issue-card"><span class="issue-num">01</span><p>ハラスメント相談窓口を設置したいが、社内で担当者を割く余裕がない。</p></div>
+      <div class="issue-card"><span class="issue-num">02</span><p>産業医・EAPサービスは効果的だが、費用が高く、利用頻度も限られている。</p></div>
+      <div class="issue-card"><span class="issue-num">03</span><p>従業員が「会社に知られたくない」と感じ、既存の相談窓口を使いたがらない。</p></div>
+      <div class="issue-card"><span class="issue-num">04</span><p>離職やメンタル不調の予兆を、早い段階でつかむ手段がない。</p></div>
     </div>
   </div>
 </section>
 
-<section class="section section-white" aria-labelledby="flow-h">
-  <div class="flow-wrap">
-    <div class="center">
-      <span class="lbl">How It Works</span>
-      <h2 class="sec-title" id="flow-h">導入の流れ</h2>
-      <p class="sec-lead">お問い合わせから、従業員の利用開始まで、最短で進めば数日です。</p>
+<section class="section" id="features" aria-labelledby="feat-h">
+  <div class="inner">
+    <div class="head reveal">
+      <span class="eyebrow">FEATURES</span>
+      <h2 class="h2" id="feat-h">こころのトーク for Business でできること</h2>
+      <p class="lead">導入のしやすさと、従業員が安心して使える設計を、両立させました。</p>
     </div>
-    <div class="flow-row">
-      <div class="flow-step">
-        <span class="fn">01</span>
-        <h4>お問い合わせ</h4>
-        <p>下記フォームより、貴社の規模・ご要望をお知らせください。</p>
+    <div class="feat-grid reveal">
+      <div class="feat-card">
+        <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 13a5 5 0 0 0 7.07 0l2.83-2.83a5 5 0 0 0-7.07-7.07L11 5"/><path d="M14 11a5 5 0 0 0-7.07 0L4.1 13.83a5 5 0 0 0 7.07 7.07L13 19"/></svg>
+        <h3>招待リンクで、すぐに導入</h3>
+        <p>管理者が招待リンクを発行し、従業員がLINEで友だち追加するだけ。専用アプリは不要です。</p>
       </div>
-      <div class="flow-step">
-        <span class="fn">02</span>
-        <h4>ご契約・プラン決定</h4>
-        <p>従業員数に応じたプランをご提案し、内容にご納得いただいた上でご契約します。</p>
+      <div class="feat-card">
+        <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+        <h3>会話内容は会社に非開示</h3>
+        <p>従業員一人ひとりの会話は暗号化して保存され、会社側が閲覧することはできません。</p>
       </div>
-      <div class="flow-step">
-        <span class="fn">03</span>
-        <h4>招待リンクの発行</h4>
-        <p>管理画面から、貴社専用の招待リンクと確認コードを発行します。</p>
+      <div class="feat-card">
+        <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20V10M12 20V4M20 20v-6"/></svg>
+        <h3>利用状況を定期レポート</h3>
+        <p>個人が特定されない範囲の利用人数・回数を、定めた周期でご担当者へお届けします。</p>
       </div>
-      <div class="flow-step">
-        <span class="fn">04</span>
-        <h4>従業員が利用開始</h4>
-        <p>従業員が招待リンクからLINE友だち追加し、確認コードを送るだけで利用開始できます。</p>
+      <div class="feat-card">
+        <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M9 12h6M12 9v6"/></svg>
+        <h3>従業員数に応じた料金</h3>
+        <p>部署単位のお試し導入から全社導入まで、規模に応じた段階料金でご相談いただけます。</p>
+      </div>
+      <div class="feat-card">
+        <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        <h3>24時間365日、対応</h3>
+        <p>深夜でも休日でも、従業員が話したいと思ったときに、いつでも応答します。</p>
+      </div>
+      <div class="feat-card">
+        <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3Z"/></svg>
+        <h3>安全性を重視した設計</h3>
+        <p>招待の仕組みには有効期限・使い回し防止・不正アクセス対策を組み込んでいます。</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section section-beige" aria-labelledby="priv-h">
-  <div class="center">
-    <span class="lbl">Privacy</span>
-    <h2 class="sec-title" id="priv-h">従業員の方が安心して使えるように</h2>
-    <p class="sec-lead">相談窓口は「使われて」初めて意味を持ちます。安心して話せることを、設計の中心に置いています。</p>
-  </div>
-  <div class="priv-wrap">
-    <h3>プライバシーに関するお約束</h3>
-    <ul class="priv-list">
-      <li>従業員個人の会話内容を、会社のご担当者が閲覧することはありません。</li>
-      <li>会社へご提供するのは、個人が特定されない範囲の利用人数・利用回数などの集計情報のみです。</li>
-      <li>会話履歴は暗号化した状態で保存します。</li>
-      <li>招待リンク・確認コードには有効期限を設け、使用後は無効化されます。</li>
-      <li>従業員の同意なく、本サービスの利用を強制することはできません。</li>
-    </ul>
-  </div>
-</section>
-
-<section class="section section-white" id="pricing" aria-labelledby="pricing-h">
-  <div class="pricing-wrap">
-    <div class="center">
-      <span class="lbl">Pricing</span>
-      <h2 class="sec-title" id="pricing-h">料金プラン</h2>
-      <p class="sec-lead">従業員数に応じた段階料金です。詳細は貴社の状況に合わせてご提案しますので、まずはお気軽にお問い合わせください。</p>
+<section class="section section-tint" aria-labelledby="flow-h">
+  <div class="inner">
+    <div class="head reveal">
+      <span class="eyebrow">HOW IT WORKS</span>
+      <h2 class="h2" id="flow-h">導入の流れ</h2>
+      <p class="lead">お問い合わせから、従業員の利用開始まで、最短で進めば数日です。</p>
     </div>
-    <table class="pricing-table">
-      <thead>
-        <tr>
-          <th>ご利用人数の目安</th>
-          <th>月額料金（税別）</th>
-          <th>主なご利用イメージ</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>〜50名</td>
-          <td class="amt">ご相談ください</td>
-          <td>部署単位でのトライアル導入に</td>
-        </tr>
-        <tr>
-          <td>51〜100名</td>
-          <td class="amt">ご相談ください</td>
-          <td>事業所単位・中規模組織に</td>
-        </tr>
-        <tr>
-          <td>101名〜</td>
-          <td class="amt">個別お見積り</td>
-          <td>全社導入・複数拠点に</td>
-        </tr>
-      </tbody>
-    </table>
-    <p class="pricing-note">※ 正式な料金表は準備中です。現時点では、お問い合わせいただいた際に個別にご案内しています。無料トライアルについてもお気軽にご相談ください。</p>
-    <div class="pricing-cta">
-      <a href="#contact" class="btn-navy">料金・トライアルについて問い合わせる →</a>
+    <div class="flow-grid reveal">
+      <div class="flow-card"><div class="flow-num">1</div><h4>お問い合わせ</h4><p>貴社の規模・ご要望をお知らせください。</p></div>
+      <div class="flow-card"><div class="flow-num">2</div><h4>ご契約・プラン決定</h4><p>従業員数に応じたプランをご提案します。</p></div>
+      <div class="flow-card"><div class="flow-num">3</div><h4>招待リンクの発行</h4><p>貴社専用の招待リンクを発行します。</p></div>
+      <div class="flow-card"><div class="flow-num">4</div><h4>従業員が利用開始</h4><p>LINE友だち追加と確認コードだけで開始。</p></div>
     </div>
   </div>
 </section>
 
-<section class="section section-beige" id="contact" aria-labelledby="contact-h">
-  <div class="contact-wrap">
-    <span class="lbl">Contact</span>
-    <h2 class="sec-title" id="contact-h">資料請求・お問い合わせ</h2>
-    <div class="contact-box">
+<section class="section" aria-labelledby="priv-h">
+  <div class="inner">
+    <div class="head reveal">
+      <span class="eyebrow">PRIVACY</span>
+      <h2 class="h2" id="priv-h">従業員の方が安心して使えるように</h2>
+      <p class="lead">相談窓口は「使われて」初めて意味を持ちます。安心して話せることを、設計の中心に置いています。</p>
+    </div>
+    <div class="priv-wrap reveal">
+      <ul class="priv-list">
+        <li><span class="priv-check">✓</span>従業員個人の会話内容を、会社のご担当者が閲覧することはありません。</li>
+        <li><span class="priv-check">✓</span>会社へご提供するのは、個人が特定されない範囲の利用人数・利用回数などの集計情報のみです。</li>
+        <li><span class="priv-check">✓</span>会話履歴は暗号化した状態で保存します。</li>
+        <li><span class="priv-check">✓</span>招待リンク・確認コードには有効期限を設け、使用後は無効化されます。</li>
+        <li><span class="priv-check">✓</span>従業員の同意なく、本サービスの利用を強制することはできません。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section section-tint" id="pricing" aria-labelledby="pricing-h">
+  <div class="inner">
+    <div class="head reveal">
+      <span class="eyebrow">PRICING</span>
+      <h2 class="h2" id="pricing-h">料金プラン</h2>
+      <p class="lead">従業員数に応じた段階料金です。詳細は貴社の状況に合わせてご提案します。</p>
+    </div>
+    <div class="pricing-grid reveal">
+      <div class="p-card">
+        <p class="p-tag">SMALL</p>
+        <p class="p-range">〜50名</p>
+        <p class="p-amt">ご相談ください</p>
+        <p class="p-use">部署単位でのトライアル導入に</p>
+      </div>
+      <div class="p-card mid">
+        <p class="p-tag">MEDIUM</p>
+        <p class="p-range">51〜100名</p>
+        <p class="p-amt">ご相談ください</p>
+        <p class="p-use">事業所単位・中規模組織に</p>
+      </div>
+      <div class="p-card">
+        <p class="p-tag">LARGE</p>
+        <p class="p-range">101名〜</p>
+        <p class="p-amt">個別お見積り</p>
+        <p class="p-use">全社導入・複数拠点に</p>
+      </div>
+    </div>
+    <p class="pricing-note">※ 正式な料金表は準備中です。現時点ではお問い合わせいただいた際に個別にご案内しています。無料トライアルについてもお気軽にご相談ください。</p>
+    <div class="pricing-cta"><a href="#contact" class="btn-blue">料金・トライアルについて問い合わせる →</a></div>
+  </div>
+</section>
+
+<section class="section" id="contact" aria-labelledby="contact-h">
+  <div class="inner">
+    <div class="head reveal">
+      <span class="eyebrow">CONTACT</span>
+      <h2 class="h2" id="contact-h">資料請求・お問い合わせ</h2>
+    </div>
+    <div class="contact-box reveal">
       <p>
         導入のご相談、資料のご請求、無料トライアルについてなど、<br>
         X（Twitter）のDMからお気軽にお問い合わせください。<br>
         貴社の状況に合わせて、担当よりご案内いたします。
       </p>
-      <a href="https://x.com/kokoro_talk_jp" target="_blank" rel="noopener" class="btn-navy">X（Twitter）のDMからお問い合わせ →</a>
+      <a href="https://x.com/kokoro_talk_jp" target="_blank" rel="noopener" class="btn-blue">X（Twitter）のDMからお問い合わせ →</a>
     </div>
   </div>
 </section>
 
 <footer role="contentinfo">
-  <div>
-    <a href="index.html" class="foot-logo">こころの<span>トーク</span></a>
-    <p class="foot-desc">従業員のこころに、いちばん近い窓口を。<br>LINEで導入できるAI相談サービス。<br><br>個人でご利用の方は、こちらから。</p>
+  <div class="foot-grid">
+    <div>
+      <a href="index.html" class="foot-logo"><img src="logo.png" alt="こころのトーク">こころのトーク</a>
+      <p class="foot-desc">従業員のこころに、いちばん近い窓口を。<br>LINEで導入できるAI相談サービス。</p>
+    </div>
+    <div class="foot-col">
+      <h4>Business</h4>
+      <a href="#issues">課題</a>
+      <a href="#features">できること</a>
+      <a href="#pricing">料金</a>
+      <a href="#contact">お問い合わせ</a>
+    </div>
+    <div class="foot-col">
+      <h4>個人の方へ</h4>
+      <a href="index.html">こころのトーク（個人向け）</a>
+      <a href="faq.html">よくあるご質問</a>
+    </div>
+    <div class="foot-col">
+      <h4>Legal</h4>
+      <a href="privacy.html">プライバシーポリシー</a>
+      <a href="terms.html">利用規約</a>
+      <a href="tokusho.html">特定商取引法</a>
+    </div>
   </div>
-  <div class="foot-col">
-    <h4>Business</h4>
-    <a href="#issues">課題</a>
-    <a href="#features">できること</a>
-    <a href="#pricing">料金</a>
-    <a href="#contact">お問い合わせ</a>
-  </div>
-  <div class="foot-col">
-    <h4>個人の方へ</h4>
-    <a href="index.html">こころのトーク（個人向け）</a>
-    <a href="faq.html">よくあるご質問</a>
-  </div>
-  <div class="foot-col">
-    <h4>Legal</h4>
-    <a href="privacy.html">プライバシーポリシー</a>
-    <a href="terms.html">利用規約</a>
-    <a href="tokusho.html">特定商取引法</a>
-  </div>
-
   <div class="foot-bar">
     <p>© 2025 こころのトーク（遠藤多恵子）. All rights reserved.</p>
   </div>
 </footer>
+
+<script>
+  const items = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  items.forEach(el => io.observe(el));
+</script>
 
 </body>
 </html>
