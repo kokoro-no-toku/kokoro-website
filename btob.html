@@ -86,13 +86,11 @@
     .sec-lead { font-size: 0.95rem; color: var(--text2); max-width: 640px; margin: 0 auto 52px; }
     .center { text-align: center; }
 
-    /* 課題 */
     .pain-grid { max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: repeat(2,1fr); gap: 2px; background: var(--border); }
     .pain-card { background: var(--white); padding: 32px 36px; display: flex; gap: 18px; align-items: flex-start; }
     .pain-mark { font-family: 'Shippori Mincho', serif; font-size: 1.6rem; color: var(--gold); flex-shrink: 0; }
     .pain-card p { font-size: 0.92rem; color: var(--text2); }
 
-    /* 機能 */
     .feat-wrap { max-width: 1180px; margin: 0 auto; }
     .feat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 3px; }
     .feat-card { background: var(--white); padding: 42px 32px; border-top: 3px solid transparent; transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; }
@@ -101,21 +99,18 @@
     .feat-title { font-family: 'Shippori Mincho', serif; font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 12px; }
     .feat-body { font-size: 0.86rem; color: var(--text2); line-height: 2; }
 
-    /* 導入の流れ */
     .flow-wrap { max-width: 920px; margin: 0 auto; }
     .flow-row { display: flex; gap: 0; align-items: stretch; }
     .flow-step { flex: 1; background: var(--white); border: 1.5px solid var(--border); padding: 32px 20px; text-align: center; position: relative; }
     .flow-step + .flow-step { margin-left: -1px; }
-    .flow-step .fn { font-family: 'Shippori Mincho', serif; font-size: 2rem; font-weight: 700; color: var(--gold-l); -webkit-text-stroke: 1.5px var(--gold); color: transparent; display: block; margin-bottom: 10px; }
+    .flow-step .fn { font-family: 'Shippori Mincho', serif; font-size: 2rem; font-weight: 700; color: transparent; -webkit-text-stroke: 1.5px var(--gold); display: block; margin-bottom: 10px; }
     .flow-step h4 { font-size: 0.92rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
     .flow-step p { font-size: 0.78rem; color: var(--text3); line-height: 1.8; }
-    .flow-arrow { display: none; }
     @media (max-width: 900px) {
       .flow-row { flex-direction: column; }
       .flow-step + .flow-step { margin-left: 0; margin-top: -1px; }
     }
 
-    /* プライバシー */
     .priv-wrap { max-width: 880px; margin: 0 auto; background: var(--white); border: 1.5px solid var(--border); padding: 48px 52px; }
     .priv-wrap h3 { font-family: 'Shippori Mincho', serif; font-size: 1.2rem; margin-bottom: 20px; color: var(--text); }
     .priv-list { list-style: none; }
@@ -123,7 +118,6 @@
     .priv-list li:last-child { border-bottom: none; }
     .priv-list li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
 
-    /* 料金 */
     .pricing-wrap { max-width: 1040px; margin: 0 auto; }
     .pricing-table { width: 100%; border-collapse: collapse; background: var(--white); box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
     .pricing-table th, .pricing-table td { padding: 20px 22px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
@@ -134,7 +128,6 @@
     .pricing-note { font-size: 0.78rem; color: var(--text3); margin-top: 18px; text-align: center; }
     .pricing-cta { text-align: center; margin-top: 40px; }
 
-    /* お問い合わせ */
     .contact-wrap { max-width: 640px; margin: 0 auto; text-align: center; }
     .contact-box { background: var(--white); border: 1.5px solid var(--border); padding: 48px 40px; margin-top: 8px; }
     .contact-box p { font-size: 0.9rem; color: var(--text2); margin-bottom: 28px; }
@@ -359,15 +352,10 @@
     <div class="contact-box">
       <p>
         導入のご相談、資料のご請求、無料トライアルについてなど、<br>
-        お気軽にお問い合わせください。<br>
+        X（Twitter）のDMからお気軽にお問い合わせください。<br>
         貴社の状況に合わせて、担当よりご案内いたします。
       </p>
-      <!--
-        ★ここにお問い合わせフォームのリンクを設定してください★
-        例：Googleフォームで作成したフォームのURLに置き換える
-        <a href="https://forms.gle/xxxxxxxx" target="_blank" rel="noopener" class="btn-navy">お問い合わせフォームへ →</a>
-      -->
-      <a href="mailto:ここに問い合わせ用メールアドレスを入力してください" class="btn-navy">メールでお問い合わせ →</a>
+      <a href="https://x.com/kokoro_talk_jp" target="_blank" rel="noopener" class="btn-navy">X（Twitter）のDMからお問い合わせ →</a>
     </div>
   </div>
 </section>
