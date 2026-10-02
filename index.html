@@ -130,7 +130,7 @@
     .feat-icon-img { width: 56px; height: 56px; object-fit: contain; margin-bottom: 18px; display: block; }
     .pricing-wrap { max-width: 1000px; margin: 0 auto; }
     .pricing-head { text-align: center; margin-bottom: 56px; }
-    .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .pricing-grid { display: grid; grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; gap: 24px; }
     .p-card { background: var(--white); border: 2px solid var(--border); padding: 56px 48px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); transition: transform 0.3s, box-shadow 0.3s; }
     .p-card:hover { transform: translateY(-4px); box-shadow: 0 10px 32px rgba(0,0,0,0.10); }
     .p-card.special { border-color: var(--gold); border-width: 3px; background: linear-gradient(160deg, #fffbf4, #fff6e8); }
@@ -180,6 +180,40 @@
       .foot-bar { margin: 40px -24px 0; padding: 20px 24px; flex-direction: column; gap: 8px; }
     }
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Kokoro no Toku (こころのトーク)",
+    "alternateName": "Kokoro Talk",
+    "serviceType": "AI mental wellness consultation chat service",
+    "description": "A Japanese-language AI companion available 24/7 via the LINE messaging app. Users can talk about loneliness, stress, relationships, work, and family concerns. The AI is designed not to lecture, interrogate, or lie, and does not replace medical, legal, or professional advice. AI-agent compatible.",
+    "provider": {
+      "@type": "Organization",
+      "name": "Kokoro no Toku",
+      "email": "kokoro010361113@gmail.com"
+    },
+    "areaServed": "Worldwide",
+    "availableLanguage": {
+      "@type": "Language",
+      "name": "Japanese"
+    },
+    "audience": {
+      "@type": "Audience",
+      "audienceType": "Adults (18+)"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "980",
+      "priceCurrency": "JPY",
+      "billingDuration": "P1M",
+      "description": "Monthly subscription, billed via PayPal. First 5 messages free. Cancel anytime from PayPal account settings.",
+      "url": "https://kokoro-no-toku.github.io/kokoro-website/"
+    },
+    "url": "https://kokoro-no-toku.github.io/kokoro-website/",
+    "termsOfService": "https://kokoro-no-toku.github.io/kokoro-website/terms.html"
+  }
+  </script>
 </head>
 <body>
 
@@ -250,12 +284,10 @@
   </div>
   <p class="hero-desc" style="font-size:0.95rem; margin-bottom:8px;">
     PayPal決済のみで完結するので、誰にも知られずに使えます。<br>
-    AIエージェントにも対応した本格設計。海外では月額<strong>$299.99</strong>で提供しているシステムを、<br>
-    日本のユーザーには特別価格<strong>月額980円</strong>でお届けしています。
+    AIエージェントにも対応した本格設計を、特別価格<strong>月額980円</strong>でお届けしています。
   </p>
   <p class="hero-desc-en">
-    A world-standard AI consultation system — AI agent compatible, built for the Japanese language, and the Japanese heart.<br>
-    Available globally at $299.99/mo. Special domestic pricing for users in Japan.
+    A world-standard AI consultation system — AI agent compatible, built for the Japanese language, and the Japanese heart.
   </p>
   <p class="hero-tagline anim anim-6">まず、話してみてください。<br><span class="hero-tagline-en">Just start talking. We're always here.</span></p>
   <div class="hero-prices anim anim-6" aria-label="料金プラン">
@@ -264,12 +296,6 @@
       <span class="price-badge">🇯🇵 国内優待価格</span>
       <span class="price-num">¥980</span>
       <span class="price-per">月額（税込）/ per month</span>
-    </div>
-    <div class="price-box">
-      <span class="price-tag">海外向け · GLOBAL</span>
-      <br>
-      <span class="price-num" style="font-size:3rem;">$299.99</span>
-      <span class="price-per">per month (USD)</span>
     </div>
   </div>
   <div class="hero-btns anim anim-6">
@@ -316,9 +342,9 @@
       <article class="feat-card reveal">
         <img src="logo.png" alt="こころのトーク" class="feat-icon-img">
         <span class="feat-num">05</span>
-        <h3 class="feat-title">グローバル対応</h3>
-        <span class="feat-en">Global Premium Access</span>
-        <p class="feat-body">世界標準のAIシステムを採用し、AIエージェントにも対応。不正アクセス対策も厳重に施した高度なシステム設計が、グローバル基準の品質を支えています。この品質を適正にご提供するため、海外向けは月額$299.99での提供となります。<br><em>World-standard AI system with agent support and enterprise-grade security — priced at $299.99/mo to reflect the quality.</em></p>
+        <h3 class="feat-title">世界標準のシステム</h3>
+        <span class="feat-en">World-Standard System</span>
+        <p class="feat-body">世界標準のAIシステムを採用し、AIエージェントにも対応。不正アクセス対策も厳重に施した高度なシステム設計が、グローバル基準の品質を支えています。<br><em>World-standard AI system with agent support and enterprise-grade security.</em></p>
       </article>
       <article class="feat-card reveal">
         <img src="logo.png" alt="こころのトーク" class="feat-icon-img">
@@ -362,30 +388,6 @@
           <li>いつでもキャンセル可能</li>
         </ul>
         <a href="https://line.me/R/ti/p/@kokoro-talk" target="_blank" rel="noopener" class="p-btn p-btn-line">LINE で始める →</a>
-      </div>
-      <div class="p-card reveal">
-        <span class="p-lbl">グローバル標準価格 · GLOBAL</span>
-        <br>
-        <h3 class="p-region">海外向け</h3>
-        <span class="p-region-en">Global standard pricing for international users</span>
-        <div class="p-price">
-          <span class="p-cur">$</span>
-          <span class="p-amt">299</span>
-          <span class="p-per">.99 / mo</span>
-        </div>
-        <p class="p-note">月額 · per month (USD)</p>
-        <p style="font-size:0.82rem; color:var(--text2); line-height:1.9; margin-bottom:24px; padding:12px 16px; background:var(--beige); border-left:3px solid var(--gold);">このシステムはAIエージェントにも対応した本格設計です。PayPal完結という匿名性の高さも含め、世界基準ではこの価格での提供となります。</p>
-        <ul class="p-list">
-          <li>Japanese language service (English version coming soon)</li>
-          <li>Unlimited LINE AI conversations</li>
-          <li>24/7, 365-day availability</li>
-          <li>Emotional analysis &amp; personalization</li>
-          <li>Full conversation history</li>
-          <li>Complete privacy protection</li>
-          <li>AI agent compatible system</li>
-          <li>Priority support response</li>
-        </ul>
-        <a href="https://line.me/R/ti/p/@kokoro-talk" target="_blank" rel="noopener" class="p-btn p-btn-gold">Get Started →</a>
       </div>
     </div>
   </div>
