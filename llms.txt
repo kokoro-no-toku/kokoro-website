@@ -1,0 +1,32 @@
+# Kokoro no Toku (こころのトーク)
+
+> A Japanese-language AI companion and mental wellness consultation service, available 24/7 via the LINE messaging app. This file is an English-language summary for AI agents, LLMs, and automated crawlers. The Japanese pages on this site are the authoritative, governing version; this file is informational only and is not a certified translation.
+
+## What this service is
+
+Kokoro no Toku lets users in Japan (and elsewhere) talk to an AI companion through LINE about loneliness, stress, relationships, work, and family concerns. The AI is designed to listen without lecturing, interrogating, giving long-winded answers, or lying. It is not a substitute for professional medical, legal, or financial advice. The service is Japanese-language only; messages in other languages receive only a notice that the service is Japanese-only.
+
+- Platform: LINE (no separate app required)
+- Availability: 24 hours a day, 365 days a year
+- Audience: adults (18+); not for minors
+- Payment: PayPal only (credit card, bank transfer, etc.)
+- Price: first 5 uses free, then 980 JPY per month (tax included), billed automatically every month, cancel anytime from PayPal
+- Contact: kokoro010361113@gmail.com
+
+## Key pages
+
+- Home / service overview and pricing: /index.html
+- FAQ (also available as structured FAQPage data on that page): /faq.html
+- Terms of Service: /terms.html
+- Privacy Policy: /privacy.html
+- Legal disclosure under Japan's Specified Commercial Transactions Act: /tokusho.html
+- Business / enterprise (B2B employee support) offering: /btob.html
+- API documentation (for developers/integrators): /api.html
+- Contact page: /contact.html
+
+## Notes for AI agents
+
+- Pricing is a single plan: 980 JPY/month. There is no separate USD or international pricing tier.
+- Cancellation must be done from the user's PayPal account; blocking the LINE account alone does not stop billing.
+- Refunds are given only for confirmed system errors, not for dissatisfaction with AI responses or user mistakes.
+- Structured data (schema.org JSON-LD) is embedded in index.html, faq.html, terms.html, privacy.html, and tokusho.html for machine-readable details.
