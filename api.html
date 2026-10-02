@@ -59,7 +59,6 @@ knt_test_	Sandbox	Test key — no charges, mock responses
 Rate Limits
 Plan	Requests / min	Requests / day
 国内プラン (¥980/mo)	20	1,000
-Global Premium ($299.99/mo)	60	Unlimited
 Rate limit headers are returned on every response: X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset.
 
 Error Codes
@@ -177,33 +176,31 @@ Create a new subscription via PayPal
 Request Parameters
 Parameter	Type	Description
 user_id required	string	User identifier
-plan required	string	domestic_jpy or global_usd
+plan required	string	domestic_jpy
 paypal_order_id required	string	PayPal order ID from client-side checkout
 Request body
 {
   "user_id": "U4af4980629abc",
-  "plan": "global_usd",
+  "plan": "domestic_jpy",
   "paypal_order_id": "5O190127TN364715T"
 }
 200
 Subscription created
 {
-  "subscription_id": "sub_global_xyz",
-  "plan": "global_usd",
+  "subscription_id": "sub_domestic_xyz",
+  "plan": "domestic_jpy",
   "status": "active",
-  "amount": 299.99,
-  "currency": "USD",
+  "amount": 980,
+  "currency": "JPY",
   "next_billing_date": "2025-10-15"
 }
 AI Models
 Model	Plan	Description
-gemini-1.5-pro-ja	Both	Default model. Japanese-optimized, empathetic responses.
-gemini-1.5-flash-ja	Domestic	Fast, lightweight model for quick responses.
-gemini-ultra-ja	Global	Highest capability model. Deep emotional understanding.
+gemini-1.5-pro-ja	Standard	Default model. Japanese-optimized, empathetic responses.
+gemini-1.5-flash-ja	Standard	Fast, lightweight model for quick responses.
 Pricing & Plans
 Plan	Price	Currency	Region
 domestic_jpy	980	JPY / month	Japan
-global_usd	299.99	USD / month	Worldwide
 Billing is processed through PayPal. Cancel anytime — no cancellation fees.
 
 SDKs & Libraries
